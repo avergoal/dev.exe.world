@@ -1,0 +1,97 @@
+.administrators {
+    padding-right: 3px;
+
+    h1 {
+        color: var(--black-primary);
+        margin-bottom: 32px;
+    }
+
+    .users {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        .user-item {
+            &.empty {
+                margin-bottom: 50px;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 8px;
+                border-bottom: 1px solid var(--grey-medium);
+                margin-bottom: 16px;
+
+                h3 {
+                    color: var(--grey-primary);
+                    display: flex;
+                    gap: 12px;
+                    align-items: center;
+                    text-transform: capitalize;
+                    position: relative;
+
+                    .tooltip {
+                        &:hover ~ .tooltip-text {
+                            visibility: visible;
+                        }
+
+
+                    }
+
+                    .tooltip-text {
+                        visibility: hidden;
+                        max-width: 272px;
+                        width: max-content;
+                        background-color: var(--black-90);
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 6px;
+                        padding: 4px 8px;
+                        position: absolute;
+                        z-index: 1;
+                        top: -11px;
+                        right: 12px;
+                        transform: translateY(-100%) translateX(50%);
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 100%;
+                            left: 50%;
+                            margin-left: -9px;
+                            border-width: 9px;
+                            border-style: solid;
+                            border-color: var(--black-90) transparent transparent transparent;
+                        }
+                    }
+                }
+            }
+
+            .empty-users {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                .image {
+                    width: 206px;
+                    height: 206px;
+
+                    img {
+                        width: inherit;
+                        height: inherit;
+                        object-fit: cover;
+                    }
+                }
+
+                .text {
+                    .b-1-regular {
+                        color: var(--black-primary);
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.news-content {
+    max-width: 650px;
+
+    .header {
+        margin-bottom: 24px;
+        display: flex;
+
+        h1 {
+            color: var(--black-primary);
+            margin-right: auto;
+        }
+    }
+
+    .empty-news {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image {
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+        }
+
+        .b-1-regular {
+            margin-bottom: 24px;
+        }
+    }
+
+    .news {
+        .search {
+            margin-bottom: 40px;
+        }
+        .news-items {
+            margin-bottom: 40px;
+            h3 {
+                margin-bottom: 8px;
+            }
+        }
+    }
+}

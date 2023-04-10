@@ -1,0 +1,68 @@
+.chart-content {
+    width: 100%;
+
+    .chart-overflow {
+        width: 100%;
+        overflow: auto;
+        padding-bottom: 25px;
+
+        &::-webkit-scrollbar {
+            height: 22px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--grey-light);
+            border-radius: 20px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: white url('../../../../src/assets/images/icons/thumb.svg') no-repeat center;
+            border-radius: 20px;
+            width: 10px;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid var(--grey-light);
+        }
+
+        .chart {
+            overflow: auto;
+            width: fit-content;
+            height: 399px;
+            background: url('../../../../src/assets/images/square.svg') bottom left;
+            display: flex;
+            align-items: flex-end;
+            gap: 32px;
+            padding: 0 16px;
+
+            .chart-item {
+                background: var(--north-wind);
+                border-radius: 24px;
+                width: 77px;
+
+                .time {
+                    color: var(--grey-primary);
+                    position: absolute;
+                    top: 8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+        .time {
+            margin-top: 8px;
+            display: flex;
+            align-items: flex-end;
+            gap: 32px;
+            width: fit-content;
+            padding: 0 16px;
+
+            .time-item {
+                display: flex;
+                justify-content: center;
+                width: 77px;
+                color: var(--grey-primary);
+            }
+        }
+    }
+}

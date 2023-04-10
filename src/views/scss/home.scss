@@ -1,0 +1,36 @@
+.content {
+    padding: 56px 135px 0 25px;
+    display: flex;
+    gap: 126px;
+
+    .context {
+        h1 {
+            margin-bottom: 16px;
+            color: var(--black-primary);
+        }
+
+        .b-1-regular {
+            margin-bottom: 24px;
+        }
+
+        .block {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 24px 16px;
+            margin-bottom: 32px;
+
+            .block-item {
+                .sub-1 {
+                    color: var(--violet-primary);
+                    margin-bottom: 8px;
+                    display: block;
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+        }
+    }
+}

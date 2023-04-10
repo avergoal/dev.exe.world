@@ -1,0 +1,47 @@
+.content {
+    padding: 40px 25px;
+
+    h1 {
+        color: var(--black-primary);
+    }
+
+    &.empty {
+        padding: 40px 136px;
+    }
+
+    &:not(.empty) {
+        h1 {
+            margin-bottom: 16px;
+        }
+
+        button {
+            margin-bottom: 32px;
+        }
+    }
+
+    .empty-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 64px;
+
+        img {
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+        }
+
+        .b-1-regular {
+            margin-bottom: 24px;
+        }
+    }
+
+    .game-content {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 24px 16px;
+    }
+}

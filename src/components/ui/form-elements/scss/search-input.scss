@@ -1,0 +1,28 @@
+label {
+    width: 100%;
+    display: flex;
+    border-radius: 12px;
+    font-family: var(--font-raleway);
+    svg {
+        position: absolute;
+        z-index: 1;
+        top: 12px;
+        left: 16px;
+    }
+    input {
+        padding: 14px 56px 13px;
+        line-height: 21px;
+        color: var(--grey-primary);
+        width: 100%;
+        background: var(--grey-light);
+        border-radius: 12px;
+        border: none;
+        &:focus-visible {
+            outline: none;
+        }
+        &:not(:placeholder-shown) {
+            outline: 2px solid var(--violet-primary);
+            background: none;
+        }
+    }
+}

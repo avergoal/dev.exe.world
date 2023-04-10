@@ -1,0 +1,21 @@
+.info-content {
+    max-width: 650px;
+    h1,
+    h3 {
+        color: var(--black-primary);
+        margin-bottom: 16px;
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        margin-bottom: 48px;
+    }
+
+    .covers {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+}

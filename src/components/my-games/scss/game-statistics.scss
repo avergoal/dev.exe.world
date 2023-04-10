@@ -1,0 +1,27 @@
+.statistics {
+    h1 {
+        margin-bottom: 24px;
+        color: var(--black-primary);
+    }
+    .charts {
+        margin-top: 32px;
+        gap: 56px;
+        display: flex;
+        flex-direction: column;
+        .item{
+            .header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 14px;
+
+                h4 {
+                    color: var(--black-primary);
+                }
+
+                .b-1-medium {
+                    color: var(--grey-primary);
+                }
+            }
+        }
+    }
+}
