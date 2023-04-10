@@ -1,0 +1,30 @@
+.table{
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    .header,
+    .table-row{
+
+        display: grid;
+        grid-template-columns: 160px 160px 160px;
+        justify-content: space-between;
+        justify-items: end;
+        padding: 0 12px;
+        gap: 8px;
+        .item:first-child {
+            justify-self: start; /* align first column to the left */
+        }
+    }
+    .header{
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--grey-medium);
+    }
+    .table-row{
+        .item{
+            padding: 6px 0;
+        }
+        .b-1-medium{
+            color: var(--violet-primary);
+        }
+    }
+}

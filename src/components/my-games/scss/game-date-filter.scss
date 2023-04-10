@@ -1,0 +1,20 @@
+.filter {
+    background: var(--grey-light);
+    border-radius: 14px;
+    padding: 4px;
+    width: fit-content;
+    display: flex;
+    gap: 4px;
+    .b-1-bold {
+        color: var(--grey-primary);
+        padding: 6px 12px;
+        border-radius: 10px;
+        text-transform: capitalize;
+        line-height: 24px;
+        cursor: pointer;
+        &.active {
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    }
+}

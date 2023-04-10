@@ -1,0 +1,23 @@
+.setting-content {
+    max-width: 650px;
+    h1,
+    h3 {
+        margin-bottom: 16px;
+        color: var(--black-primary);
+    }
+
+    .main-settings,
+    .iframe-settings {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .main-settings {
+        margin-bottom: 48px;
+    }
+
+    .iframe-settings {
+        margin-bottom: 24px;
+    }
+}

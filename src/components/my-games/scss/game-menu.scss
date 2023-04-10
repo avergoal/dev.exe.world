@@ -1,0 +1,59 @@
+aside {
+    background: var(--grey-light);
+    border-radius: 0 24px 24px 0;
+    max-width: 247px;
+    width: 100%;
+    padding: 24px 16px 36px 25px;
+    position: absolute;
+    left: 0;
+    top: 16px;
+    display: flex;
+    gap: 32px;
+    flex-direction: column;
+
+    .game-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .game-image {
+            border-radius: 8px;
+            overflow: hidden;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.background {
+                background: #ffffff;
+            }
+
+            svg {
+                fill: var(--grey-medium);
+            }
+        }
+
+        .game-name {
+            color: var(--black-primary);
+        }
+    }
+
+    .menu-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .list-item {
+            padding: 10px 16px;
+            border-radius: 100px;
+            width: max-content;
+            color: var(--grey-primary);
+
+            &.router-link-active {
+                background: var(--violet-15);
+                color: var(--violet-primary);
+            }
+        }
+    }
+}

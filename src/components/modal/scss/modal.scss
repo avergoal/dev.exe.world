@@ -1,0 +1,29 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--black-72);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 5000;
+    transition: all 0.5s ease;
+
+    &.open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .modal-content {
+        padding: 32px;
+        max-width: 872px;
+        background: var(--white-primary);
+        border-radius: 24px;
+        width: 100%;
+
+    }
+}

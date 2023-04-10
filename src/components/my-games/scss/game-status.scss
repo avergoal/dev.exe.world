@@ -1,0 +1,49 @@
+.status-content {
+    max-width: 650px;
+    h1 {
+        margin-bottom: 24px;
+        color: var(--black-primary);
+    }
+
+    .current-status,
+    .message {
+        margin-bottom: 24px;
+    }
+    .current-status {
+        .b-1-regular {
+            margin-bottom: 4px;
+        }
+    }
+
+    .sub-1 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        &.block {
+            color: var(--grey-primary);
+        }
+        &.approval {
+            color: var(--emerald-primary);
+        }
+        &.published {
+            color: var(--green-primary);
+        }
+        &.rejected {
+            color: var(--orange-primary);
+        }
+    }
+    .b-1-regular {
+        color: var(--black-primary);
+        &.block {
+            a {
+                color: var(--violet-primary);
+                font-weight: 500;
+            }
+        }
+        &.rejected {
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+}

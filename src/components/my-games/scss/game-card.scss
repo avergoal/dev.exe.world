@@ -1,0 +1,42 @@
+.block {
+    width: 317px;
+    height: 245px;
+    background: #ffffff;
+    border-radius: 16px;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0 64px 67px rgba(0, 0, 0, 0.17), 0 14.2952px 14.9653px rgba(0, 0, 0, 0.0949616),
+            0 4.25607px 4.45557px rgba(0, 0, 0, 0.0648379);
+
+        .card {
+            position: absolute;
+            height: 261px;
+            top: -16px;
+        }
+    }
+
+    .card {
+        width: 317px;
+        height: 245px;
+
+        .image {
+            margin-bottom: 8px;
+            width: 317px;
+            height: 196px;
+        }
+
+        .sub-1 {
+            margin-left: 16px;
+            margin-bottom: 4px;
+            line-height: 22px;
+        }
+
+        .b-2-medium {
+            margin-left: 16px;
+            margin-bottom: 4px;
+            line-height: 15px;
+        }
+    }
+}

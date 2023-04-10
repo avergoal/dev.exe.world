@@ -1,0 +1,54 @@
+.payments {
+    h1 {
+        margin-bottom: 24px;
+    }
+
+    .balance {
+        margin-bottom: 34px;
+
+        .b-1-regular {
+            color: var(--black-primary);
+            margin-bottom: 4px;
+        }
+
+        h4 {
+            color: var(--black-primary);
+            margin-bottom: 8px;
+        }
+
+        .b-1-medium {
+            color: var(--violet-primary);
+
+        }
+    }
+
+    .charts {
+        margin-bottom: 56px;
+
+        .item {
+            display: flex;
+            flex-direction: column;
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 14px;
+            }
+
+            .filter {
+                margin-bottom: 16px;
+            }
+        }
+    }
+
+    .payments-tables {
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+        .table-item {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+}

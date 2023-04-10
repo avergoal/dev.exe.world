@@ -1,0 +1,22 @@
+footer {
+    width: 1366px;
+    padding: 0 25px 20px 25px;
+    margin: auto auto 0 auto;
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 19px;
+        border-top: 1px solid var(--grey-medium);
+        .b-2-regular {
+            color: var(--grey-primary);
+        }
+        nav {
+            display: flex;
+            gap: 48px;
+            a {
+                color: var(--grey-primary);
+            }
+        }
+    }
+}
