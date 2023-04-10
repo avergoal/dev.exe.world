@@ -9,6 +9,7 @@ const modal = useModalStore()
     <div class="modal" :class="{ open: modal.modal.open }" @click.self="modal.toggleModal({})">
         <modal-add-news v-if="modal.modal.target === 'add-news'" />
         <modal-add-administrators v-if="modal.modal.target === 'add-administrators'"/>
+
     </div>
 </template>
 
