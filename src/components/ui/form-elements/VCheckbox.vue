@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
-    violet:{
-        default:false
+    violet: {
+        default: false
     }
 })
 </script>

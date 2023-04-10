@@ -1,10 +1,9 @@
-.table{
+.table {
     display: flex;
     gap: 8px;
     flex-direction: column;
     .header,
-    .table-row{
-
+    .table-row {
         display: grid;
         grid-template-columns: 160px 160px 160px;
         justify-content: space-between;
@@ -15,15 +14,15 @@
             justify-self: start; /* align first column to the left */
         }
     }
-    .header{
+    .header {
         padding-bottom: 8px;
         border-bottom: 1px solid var(--grey-medium);
     }
-    .table-row{
-        .item{
+    .table-row {
+        .item {
             padding: 6px 0;
         }
-        .b-1-medium{
+        .b-1-medium {
             color: var(--violet-primary);
         }
     }

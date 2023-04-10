@@ -16,10 +16,10 @@ defineProps({
 <template>
     <fieldset @click="focus">
         <input type="text" ref="vInput" class="b-1-regular" placeholder=" " />
-        <legend >
+        <legend>
             <slot></slot>
         </legend>
-        <v-toggle v-if="toggle"/>
+        <v-toggle v-if="toggle" />
     </fieldset>
 </template>
 

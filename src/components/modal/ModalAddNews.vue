@@ -4,7 +4,7 @@ import VInput from '@/components/ui/form-elements/VInput.vue'
 import VDateInput from '@/components/ui/form-elements/VDateInput.vue'
 import VTextArea from '@/components/ui/form-elements/VTextArea.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
-import VInputFile from "@/components/ui/form-elements/VInputFile.vue";
+import VInputFile from '@/components/ui/form-elements/VInputFile.vue'
 </script>
 <template>
     <div class="modal-content">
@@ -27,7 +27,7 @@ import VInputFile from "@/components/ui/form-elements/VInputFile.vue";
             </div>
             <div class="buttons">
                 <div class="file">
-                    <v-input-file/>
+                    <v-input-file />
                 </div>
                 <div class="action">
                     <main-button :secondary="true">preview</main-button>

@@ -1,6 +1,6 @@
 <script setup>
-import VToggle from "@/components/ui/form-elements/VToggle.vue"
-import DeleteIcon from "@/components/icons/DeleteIcon.vue";
+import VToggle from '@/components/ui/form-elements/VToggle.vue'
+import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 
 defineProps({
     title: String
@@ -13,17 +13,17 @@ defineProps({
             <div class="list-item">
                 <div class="user">
                     <div class="image">
-                        <img src="../../../src/assets/images/game.png" alt="">
+                        <img src="../../../src/assets/images/game.png" alt="" />
                     </div>
                     <p class="b-1-bold">Liam Benjamin</p>
                 </div>
                 <div class="actions">
                     <div class="allow">
                         <p class="b-2-medium">Allow test payments</p>
-                        <v-toggle/>
+                        <v-toggle />
                     </div>
                     <div class="delete">
-                        <delete-icon/>
+                        <delete-icon />
                     </div>
                 </div>
             </div>
@@ -31,5 +31,5 @@ defineProps({
     </div>
 </template>
 <style scoped lang="scss">
-@import "./scss/game-administrators-users.scss";
+@import './scss/game-administrators-users.scss';
 </style>

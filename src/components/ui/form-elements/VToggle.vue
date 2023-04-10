@@ -1,7 +1,4 @@
-
-<script setup>
-
-</script>
+<script setup></script>
 <template>
     <label class="toggle">
         <input type="checkbox" />

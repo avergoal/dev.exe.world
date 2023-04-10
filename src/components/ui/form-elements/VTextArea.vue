@@ -15,7 +15,7 @@ function focus() {
 </script>
 
 <template>
-    <fieldset class="textarea"  @click="focus">
+    <fieldset class="textarea" @click="focus">
         <textarea v-model="textarea" ref="vTextArea" placeholder=" " maxlength="1000"></textarea>
         <legend>
             <slot></slot>

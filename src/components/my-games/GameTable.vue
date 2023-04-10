@@ -1,15 +1,15 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import MainButton from "@/components/ui/buttons/MainButton.vue";
+import { onMounted, ref } from 'vue'
+import MainButton from '@/components/ui/buttons/MainButton.vue'
 
 const props = defineProps({
     data: Array,
-    titles:Array
+    titles: Array
 })
 const keys = ref([])
 
 onMounted(() => {
-    keys.value = Object.keys(props.data[0]);
+    keys.value = Object.keys(props.data[0])
 })
 </script>
 <template>
@@ -27,5 +27,5 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-@import "./scss/game-table.scss";
+@import './scss/game-table.scss';
 </style>
