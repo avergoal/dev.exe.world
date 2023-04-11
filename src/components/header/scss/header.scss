@@ -40,12 +40,13 @@ header {
         .account-section {
             position: relative;
             display: contents;
+            user-select: none;
 
             .account {
                 padding: 8px;
                 background: var(--grey-light);
                 border-radius: 12px;
-                width: 172px;
+                min-width: 172px;
                 height: 48px;
                 display: flex;
                 align-items: center;

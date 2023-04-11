@@ -1,17 +1,25 @@
 <script setup>
-defineProps({
-    violet: {
-        default: false
-    }
-})
+import {defineEmits, ref} from "vue";
+
+const emit = defineEmits([
+    'update:modelValue'
+])
+
+const isChecked = ref(false)
+
+const onInput = () => {
+    emit('update:modelValue', isChecked.value)
+}
+
+
 </script>
 
 <template>
     <label for="checkbox" class="checkbox b-2-regular">
-        <input type="checkbox" id="checkbox" />
+        <input @change="onInput" v-model="isChecked" type="checkbox" id="checkbox"/>
         <span class="checkmark"></span>
         <slot></slot>
-        <span class="violet" v-if="violet">
+        <span class="violet" v-if="$slots.violet">
             <slot name="violet"></slot>
         </span>
     </label>

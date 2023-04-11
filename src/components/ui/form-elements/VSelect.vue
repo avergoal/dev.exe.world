@@ -1,13 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import {defineEmits, ref} from 'vue'
 import DropdownIcon from '@/components/icons/DropdownIcon.vue'
 
+const emit = defineEmits([
+    'update:modelValue'
+])
+
 const props = defineProps({
-    data: Array
+    data: null,
+    showSelect: String,
+    idType:String
 })
 const open = ref(false)
-const genre = ref('')
-function openSelect() {
+const selected = ref('')
+const openSelect = () => {
     open.value = !open.value
     if (open.value) {
         document.addEventListener('click', closeSelect)
@@ -16,12 +22,14 @@ function openSelect() {
     }
 }
 
-function selectItem(value) {
-    genre.value = value
+
+const selectItem = (value) => {
+    selected.value = value[props.showSelect]
     open.value = false
+    emit('update:modelValue', value[props.idType])
 }
 
-function closeSelect(e) {
+const closeSelect = (e) => {
     if (!e.target.closest('.select') && open.value) {
         open.value = false
         document.removeEventListener('click', closeSelect)
@@ -31,24 +39,24 @@ function closeSelect(e) {
 
 <template>
     <fieldset class="select">
-        <input type="text" list="data" disabled placeholder=" " v-model="genre" />
+        <input type="text" list="data" disabled placeholder=" " v-model="selected"/>
         <legend>
-            <slot />
+            <slot/>
         </legend>
         <div class="input-absolute" @click="openSelect">
             <div class="drop-icon" :class="{ open }">
-                <dropdown-icon />
+                <dropdown-icon/>
             </div>
         </div>
         <div class="select-overflow">
             <div class="select-items" v-if="open">
                 <div
                     @click="selectItem(datum)"
-                    :key="datum"
+                    :key="datum[idType]"
                     class="item sub-2"
                     v-for="datum in props.data"
                 >
-                    {{ datum }}
+                    {{ datum[showSelect] }}
                 </div>
             </div>
         </div>

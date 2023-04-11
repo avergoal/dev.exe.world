@@ -1,5 +1,6 @@
 <script setup>
 import DocumentationMenu from '@/components/documentation/menu/DocumentationMenu.vue'
+
 </script>
 <template>
     <div class="content">

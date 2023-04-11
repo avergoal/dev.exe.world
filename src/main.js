@@ -1,18 +1,19 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import buttons from '@/components/ui/buttons/buttons'
+import instance from '@/utils/axios'
 import './assets/css/main.css'
 
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
+app.config.globalProperties.$axios = instance
 
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(({ store }) => {
+    store.$axios = app.config.globalProperties.$axios
+})
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
-
-buttons.forEach((el) => {
-    app.component(el.name, el)
-})

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import {computed, defineEmits, ref} from 'vue'
 
 const textarea = ref('')
 
@@ -12,11 +12,21 @@ const vTextArea = ref(null)
 function focus() {
     vTextArea.value.focus()
 }
+
+const emit = defineEmits([
+    'update:modelValue'
+])
+
+
+const onInput = (event) => {
+    emit('update:modelValue', event.target.value)
+}
+
 </script>
 
 <template>
     <fieldset class="textarea" @click="focus">
-        <textarea v-model="textarea" ref="vTextArea" placeholder=" " maxlength="1000"></textarea>
+        <textarea @input="onInput" v-model="textarea" ref="vTextArea" placeholder=" " class="b-1-regular" maxlength="1000"></textarea>
         <legend>
             <slot></slot>
         </legend>

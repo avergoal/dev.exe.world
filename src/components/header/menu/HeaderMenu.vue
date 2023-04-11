@@ -1,6 +1,13 @@
 <script setup>
 import GamesIcon from '@/components/icons/GamesIcon.vue'
 import StopIcon from '@/components/icons/StopIcon.vue'
+import {useAuthStore} from "@/stores/auth";
+
+const auth = useAuthStore()
+
+const signOut = async ()=>{
+    await auth.logout()
+}
 </script>
 
 <template>
@@ -11,7 +18,7 @@ import StopIcon from '@/components/icons/StopIcon.vue'
             </div>
             <div class="sub-2">Go to Exe Profile</div>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="signOut">
             <div class="icon">
                 <stop-icon />
             </div>

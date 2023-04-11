@@ -1,38 +1,48 @@
 <script setup>
-import { ref } from 'vue'
+import {computed, onMounted} from 'vue'
 import AddIcon from '@/components/icons/AddIcon.vue'
 import GameCard from '@/components/my-games/GameCard.vue'
 import router from '@/router'
+import MainButton from "@/components/ui/buttons/MainButton.vue";
+import {useGameStore} from "@/stores/game";
 
-const empty = ref(false)
+const gameStore = useGameStore()
 
-function toAdd() {
-    router.push({ name: 'MyGamesAdd' })
+const games = computed(()=>{
+    return gameStore.getGames
+})
+
+
+const toAdd = () => {
+    router.push({name: 'MyGamesAdd'})
 }
-function toGame(id) {
-    router.push({ name: 'GameInfo', params: { id } })
+const toGame = (id) => {
+    router.push({name: 'GameInfo', params: {id}})
 }
+
+onMounted(()=>{
+    gameStore.getMyGames()
+})
+
 </script>
 <template>
-    <div class="content" :class="{ empty: empty }">
+    <div class="content" :class="{ empty: !games.length }">
         <h1>My Games</h1>
-        <main-button v-if="!empty" :icon="true" @click="toAdd"> <add-icon />add game </main-button>
-        <div v-if="empty" class="empty-block">
-            <img src="../../assets/images/sleep.svg" alt="" />
+        <main-button v-if="games.length" :icon="true" @click="toAdd">
+            <add-icon/>
+            add game
+        </main-button>
+        <div v-if="!games.length" class="empty-block">
+            <img src="../../assets/images/sleep.svg" alt=""/>
             <h2>You haven't added any games yet</h2>
             <p class="b-1-regular">Add your first game and track stats</p>
-            <main-button :icon="true" @click="toAdd"> <add-icon />add game </main-button>
+            <main-button :icon="true" @click="toAdd">
+                <add-icon/>
+                add game
+            </main-button>
         </div>
         <div v-else class="game-content">
-            <game-card @click="toGame(1)" />
-            <game-card />
-            <game-card />
-            <game-card />
-            <game-card />
-            <game-card />
-            <game-card />
-            <game-card />
-            <game-card />
+            <game-card @click="toGame(game.gid)" :key="game.gid" :game="game" v-for="game in games"/>
         </div>
     </div>
 </template>

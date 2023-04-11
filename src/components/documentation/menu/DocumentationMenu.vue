@@ -1,33 +1,31 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import {useDocumentationStore} from "@/stores/documentation";
+import {computed, onMounted} from "vue";
+
+const documentation = useDocumentationStore()
+const menuItems = computed(()=>{
+    return documentation.getMenu
+})
+
+onMounted(()=>{
+    documentation.setDocumentationsMenu()
+})
+
+const selectMenu = (selected)=>{
+    documentation.setDocumentationsMenu(selected)
+}
 </script>
 
 <template>
     <nav>
-        <div class="nav-group">
+        <div class="nav-group" :key="menu.id" v-for="menu in menuItems.contents">
             <div class="primary-route">
-                <router-link class="sub-1" :to="{ name: 'Documentation' }"
-                    >Working with the application</router-link
-                >
+                <div class="sub-1" @click="selectMenu(menu.page_id)" :class="{active:menu.selected}">{{ menu.title }}
+                </div>
             </div>
             <div class="secondary-route">
-                <router-link class="b-2-medium" :to="{ name: 'Placing' }"
-                    >Placing the game</router-link
-                >
-                <router-link class="b-2-medium" to="/">Game placement guidelines</router-link>
-                <router-link class="b-2-medium" to="/">Accommodation conditions</router-link>
-            </div>
-        </div>
-        <div class="nav-group">
-            <div class="primary-route">
-                <router-link class="sub-1" :to="{ name: 'Documentation' }">Integration</router-link>
-            </div>
-            <div class="secondary-route">
-                <router-link class="b-2-medium" to="">Short description</router-link>
-                <router-link class="b-2-medium" to="">Application methods</router-link>
-                <router-link class="b-2-medium" to="">Interface methods</router-link>
-                <router-link class="b-2-medium" to="">Server methods</router-link>
-                <router-link class="b-2-medium" to="">Application server requirements</router-link>
+                <div class="b-2-medium" @click="selectMenu(sub.page_id)" :class="{active:sub.selected}" :key="sub.id" v-for="sub in menu.subs">{{sub.title}}
+                </div>
             </div>
         </div>
     </nav>

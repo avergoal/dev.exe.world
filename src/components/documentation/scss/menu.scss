@@ -13,6 +13,8 @@ nav {
 
         .primary-route {
             .sub-1 {
+                cursor: pointer;
+                user-select: none;
                 color: var(--grey-primary);
                 border-radius: 100px;
                 padding: 10px 16px;
@@ -26,7 +28,7 @@ nav {
                     background: var(--violet-20);
                 }
 
-                &.router-link-exact-active {
+                &.active {
                     background: var(--violet-15);
                 }
             }
@@ -39,6 +41,8 @@ nav {
             margin-bottom: 32px;
 
             .b-2-medium {
+                cursor: pointer;
+                user-select: none;
                 padding-left: 32px;
                 line-height: 24px;
                 color: var(--grey-primary);
@@ -50,7 +54,7 @@ nav {
                     color: var(--violet-dark);
                 }
 
-                &.router-link-exact-active {
+                &.active {
                     color: var(--violet-primary);
                     &:before {
                         content: '';

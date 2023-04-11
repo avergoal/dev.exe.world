@@ -1,5 +1,6 @@
 <script setup>
 import AddIcon from '@/components/icons/AddIcon.vue'
+import MainButton from "@/components/ui/buttons/MainButton.vue";
 </script>
 <template>
     <div class="content">

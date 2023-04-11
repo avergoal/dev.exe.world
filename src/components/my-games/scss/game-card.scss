@@ -5,6 +5,7 @@
     border-radius: 16px;
     cursor: pointer;
     position: relative;
+    box-shadow: none;
 
     &:hover {
         box-shadow: 0 64px 67px rgba(0, 0, 0, 0.17), 0 14.2952px 14.9653px rgba(0, 0, 0, 0.0949616),
@@ -20,6 +21,9 @@
     .card {
         width: 317px;
         height: 245px;
+        position: absolute;
+        top: 0;
+        transition: .1s;
 
         .image {
             margin-bottom: 8px;

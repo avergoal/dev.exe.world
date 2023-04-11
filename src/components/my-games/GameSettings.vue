@@ -16,8 +16,6 @@ const data = ['asd', 'asd', 'asd', 'asd', 'asd']
         </div>
         <h3>Iframe container settings</h3>
         <div class="iframe-settings">
-            <v-input>Iframe width</v-input>
-            <v-input>Iframe height</v-input>
             <v-input>Http address</v-input>
             <v-input>Https address</v-input>
             <v-input>Callback address</v-input>
