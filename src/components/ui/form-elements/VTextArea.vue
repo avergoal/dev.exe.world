@@ -1,32 +1,55 @@
 <script setup>
-import {computed, defineEmits, ref} from 'vue'
+import { computed, defineEmits, onMounted, ref, watch } from 'vue'
 
-const textarea = ref('')
+const emit = defineEmits(['update:modelValue'])
 
-const count = computed(() => {
-    return textarea.value.length
+const props = defineProps({
+    inputValue: {
+        default: '',
+        type: String
+    }
 })
 
-const vTextArea = ref(null)
+onMounted(() => {
+    if (props.inputValue) {
+        value.value = props.inputValue
+    }
+})
 
-function focus() {
+watch(
+    () => props.inputValue,
+    (newValue) => {
+        if (newValue) {
+            emit('update:modelValue', newValue)
+            value.value = newValue
+        }
+    }
+)
+
+const vTextArea = ref(null)
+const value = ref('')
+
+const count = computed(() => value.value.length)
+
+const focus = () => {
     vTextArea.value.focus()
 }
-
-const emit = defineEmits([
-    'update:modelValue'
-])
-
 
 const onInput = (event) => {
     emit('update:modelValue', event.target.value)
 }
-
 </script>
 
 <template>
     <fieldset class="textarea" @click="focus">
-        <textarea @input="onInput" v-model="textarea" ref="vTextArea" placeholder=" " class="b-1-regular" maxlength="1000"></textarea>
+        <textarea
+            @input="onInput"
+            v-model="value"
+            ref="vTextArea"
+            placeholder=" "
+            class="b-1-regular"
+            maxlength="1000"
+        ></textarea>
         <legend>
             <slot></slot>
         </legend>

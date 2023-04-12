@@ -1,19 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { defineEmits, ref } from 'vue'
 
-const filters = ['day', 'week', 'month', 'year']
-const active = ref(0)
+const emit = defineEmits(['update:periodValue'])
+
+const periods = ['day', 'week', 'month', 'year']
+const activePeriod = ref(0)
+
+const selectPeriod = (period, key) => {
+    activePeriod.value = key
+    emit('update:periodValue', period)
+}
 </script>
 <template>
     <div class="filter">
         <div
             class="b-1-bold"
-            :class="{ active: key === active }"
-            @click="active = key"
+            :class="{ active: key === activePeriod }"
+            @click="selectPeriod(period, key)"
             :key="key"
-            v-for="(filter, key) in filters"
+            v-for="(period, key) in periods"
         >
-            {{ filter }}
+            {{ period }}
         </div>
     </div>
 </template>

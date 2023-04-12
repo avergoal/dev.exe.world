@@ -1,6 +1,14 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
     charts: Array
+})
+
+const maxValue = computed(() => {
+    return props.charts.reduce((acc, curr) => {
+        return curr.value > acc ? curr.value : acc
+    }, Number.MIN_SAFE_INTEGER)
 })
 </script>
 <template>
@@ -9,17 +17,13 @@ const props = defineProps({
             <div class="chart">
                 <div
                     class="chart-item"
-                    :key="chart.height"
+                    :style="`height:${(240 / maxValue) * chart.value}px`"
+                    :key="chart.time"
                     v-for="chart in props.charts"
-                    :style="`height:${chart.height}px`"
                 ></div>
             </div>
             <div class="time">
-                <div
-                    class="time-item c-1-regular"
-                    :key="chart.height"
-                    v-for="chart in props.charts"
-                >
+                <div class="time-item c-1-regular" :key="chart.time" v-for="chart in props.charts">
                     {{ chart.time }}
                 </div>
             </div>

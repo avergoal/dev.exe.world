@@ -1,11 +1,11 @@
 <script setup>
 import GamesIcon from '@/components/icons/GamesIcon.vue'
 import StopIcon from '@/components/icons/StopIcon.vue'
-import {useAuthStore} from "@/stores/auth";
+import { useAuthStore } from '@/stores/auth'
 
 const auth = useAuthStore()
 
-const signOut = async ()=>{
+const signOut = async () => {
     await auth.logout()
 }
 </script>

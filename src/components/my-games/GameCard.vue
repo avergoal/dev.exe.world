@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-    game:Object
+    game: Object
 })
 </script>
 <template>

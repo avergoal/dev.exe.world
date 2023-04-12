@@ -1,17 +1,17 @@
 <script setup>
-import {useDocumentationStore} from "@/stores/documentation";
-import {computed, onMounted} from "vue";
+import { useDocumentationStore } from '@/stores/documentation'
+import { computed, onMounted } from 'vue'
 
 const documentation = useDocumentationStore()
-const menuItems = computed(()=>{
+const menuItems = computed(() => {
     return documentation.getMenu
 })
 
-onMounted(()=>{
+onMounted(() => {
     documentation.setDocumentationsMenu()
 })
 
-const selectMenu = (selected)=>{
+const selectMenu = (selected) => {
     documentation.setDocumentationsMenu(selected)
 }
 </script>
@@ -20,11 +20,23 @@ const selectMenu = (selected)=>{
     <nav>
         <div class="nav-group" :key="menu.id" v-for="menu in menuItems.contents">
             <div class="primary-route">
-                <div class="sub-1" @click="selectMenu(menu.page_id)" :class="{active:menu.selected}">{{ menu.title }}
+                <div
+                    class="sub-1"
+                    @click="selectMenu(menu.page_id)"
+                    :class="{ active: menu.selected }"
+                >
+                    {{ menu.title }}
                 </div>
             </div>
             <div class="secondary-route">
-                <div class="b-2-medium" @click="selectMenu(sub.page_id)" :class="{active:sub.selected}" :key="sub.id" v-for="sub in menu.subs">{{sub.title}}
+                <div
+                    class="b-2-medium"
+                    @click="selectMenu(sub.page_id)"
+                    :class="{ active: sub.selected }"
+                    :key="sub.id"
+                    v-for="sub in menu.subs"
+                >
+                    {{ sub.title }}
                 </div>
             </div>
         </div>

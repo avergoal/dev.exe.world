@@ -1,6 +1,6 @@
-import {createRouter, createWebHistory} from 'vue-router'
-import {useAuthStore} from "@/stores/auth";
-import {computed} from "vue";
+import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+import { computed } from 'vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +10,7 @@ const router = createRouter({
             path: '/',
             name: 'Home',
             component: () => import('@/views/HomeView.vue'),
-            meta: {requiresAuth: true}
+            meta: { requiresAuth: true }
         },
         {
             path: '/auth',
@@ -20,7 +20,7 @@ const router = createRouter({
         {
             path: '/documentation',
             component: () => import('@/views/DocumentationView.vue'),
-            meta: {requiresAuth: true},
+            meta: { requiresAuth: true },
             children: [
                 {
                     path: '',
@@ -39,19 +39,19 @@ const router = createRouter({
             path: '/my-games',
             name: 'MyGames',
             component: () => import('@/views/my-games/MyGames.vue'),
-            meta: {requiresAuth: true}
+            meta: { requiresAuth: true }
         },
         {
             path: '/my-games/add',
             name: 'MyGamesAdd',
             component: () => import('@/views/my-games/MyGamesAdd.vue'),
-            meta: {requiresAuth: true}
+            meta: { requiresAuth: true }
         },
         {
             path: '/my-games/game/:id',
             name: 'Game',
             component: () => import('@/views/my-games/GameView.vue'),
-            meta: {requiresAuth: true},
+            meta: { requiresAuth: true },
             children: [
                 {
                     path: 'info',

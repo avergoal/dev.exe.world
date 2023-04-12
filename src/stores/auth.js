@@ -1,6 +1,5 @@
-import {defineStore} from 'pinia'
-import {useAppStore} from "@/stores/app";
-
+import { defineStore } from 'pinia'
+import { useAppStore } from '@/stores/app'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -11,7 +10,7 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         async auth(token) {
-            const {data} = await this.$axios.post('auth', {
+            const { data } = await this.$axios.post('auth', {
                 api_token: token
             })
             if (data.error) {
@@ -19,13 +18,12 @@ export const useAuthStore = defineStore('auth', {
                 this.isLogged = false
             } else {
                 localStorage.setItem('token', token)
-                this.isLogged = true
                 const app = useAppStore()
                 await app.init()
             }
         },
         async signIn(params) {
-            const {data} = await this.$axios.post('signin', params)
+            const { data } = await this.$axios.post('signin', params)
             if (!data.error) {
                 await this.auth(data.response.api_token)
                 return true
@@ -33,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
             return data.error
         },
         async logout() {
-            const {data} = await this.$axios.post('signout')
+            const { data } = await this.$axios.post('signout')
             if (data.response.success) {
                 localStorage.removeItem('token')
                 window.location.reload()
@@ -42,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
             return data.error
         },
         checkLogged() {
-            this.isLogged = !!localStorage.token;
+            this.isLogged = !!localStorage.token
         }
     }
 })

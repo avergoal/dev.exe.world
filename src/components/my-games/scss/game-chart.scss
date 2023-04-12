@@ -37,6 +37,8 @@
             .chart-item {
                 background: var(--north-wind);
                 border-radius: 24px;
+                max-height: 318px;
+                min-height: 77px;
                 width: 77px;
 
                 .time {

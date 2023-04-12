@@ -1,18 +1,37 @@
 <script setup>
-import {defineEmits, ref} from 'vue'
+import { defineEmits, onMounted, ref, watch } from 'vue'
 import DropdownIcon from '@/components/icons/DropdownIcon.vue'
 
-const emit = defineEmits([
-    'update:modelValue'
-])
+const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
     data: null,
     showSelect: String,
-    idType:String
+    idType: String,
+    selectedValue: Number
 })
+
+onMounted(() => {
+    if (props.selectedValue) {
+        selected.value = props.data.find((item) => item.cid === props.selectedValue)[
+            props.showSelect
+        ]
+    }
+})
+
+watch(
+    () => props.selectedValue,
+    (newValue) => {
+        if (newValue) {
+            selected.value = props.data.find((item) => item.cid === newValue)[props.showSelect]
+            emit('update:modelValue', newValue)
+        }
+    }
+)
+
 const open = ref(false)
 const selected = ref('')
+
 const openSelect = () => {
     open.value = !open.value
     if (open.value) {
@@ -21,7 +40,6 @@ const openSelect = () => {
         document.removeEventListener('click', closeSelect)
     }
 }
-
 
 const selectItem = (value) => {
     selected.value = value[props.showSelect]
@@ -39,13 +57,13 @@ const closeSelect = (e) => {
 
 <template>
     <fieldset class="select">
-        <input type="text" list="data" disabled placeholder=" " v-model="selected"/>
+        <input type="text" list="data" disabled placeholder=" " v-model="selected" />
         <legend>
-            <slot/>
+            <slot />
         </legend>
         <div class="input-absolute" @click="openSelect">
             <div class="drop-icon" :class="{ open }">
-                <dropdown-icon/>
+                <dropdown-icon />
             </div>
         </div>
         <div class="select-overflow">

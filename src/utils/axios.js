@@ -11,9 +11,13 @@ instance.interceptors.request.use(
     (config) => {
         const apiToken = localStorage.token
         if (apiToken) {
-            config.data = {
-                ...config.data,
-                api_token: apiToken
+            if (config.data instanceof FormData) {
+                config.data.append('api_token', apiToken)
+            } else {
+                config.data = {
+                    ...config.data,
+                    api_token: apiToken
+                }
             }
         }
         return config
@@ -24,12 +28,15 @@ instance.interceptors.request.use(
 )
 
 instance.interceptors.response.use(
-    response => {
+    (response) => {
         return response
     },
-    error => {
+    (error) => {
         console.log(error.response.data.error)
-        if (error.response.data.error === 'user_not_logged_in' || error.response.data.error === 'token_expired') {
+        if (
+            error.response.data.error === 'user_not_logged_in' ||
+            error.response.data.error === 'token_expired'
+        ) {
             localStorage.removeItem('token')
             window.location.reload()
         }

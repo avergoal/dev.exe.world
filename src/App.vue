@@ -1,15 +1,15 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import {computed, onMounted} from 'vue'
-import {useAuthStore} from "@/stores/auth";
+import { computed, onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 import Header from '@/components/header/HeaderComponent.vue'
 import Footer from '@/components/footer/FooterComponent.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
-import {useAppStore} from "@/stores/app";
+import { useAppStore } from '@/stores/app'
 
 const auth = useAuthStore()
 const app = useAppStore()
-const isLogged = computed(()=>{
+const isLogged = computed(() => {
     return auth.getIsLogged
 })
 onMounted(() => {

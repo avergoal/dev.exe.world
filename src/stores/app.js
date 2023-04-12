@@ -1,6 +1,7 @@
-import {defineStore} from 'pinia'
-import {useUserStore} from "@/stores/user";
-import {useGameStore} from "@/stores/game";
+import { defineStore } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import { useGameStore } from '@/stores/game'
+import { useMediaStore } from '@/stores/media'
 
 export const useAppStore = defineStore('app', {
     actions: {
@@ -8,10 +9,11 @@ export const useAppStore = defineStore('app', {
             if (localStorage.token) {
                 const user = useUserStore()
                 const game = useGameStore()
-                const {data} = await this.$axios.post('dev.init')
+                const media = useMediaStore()
+                const { data } = await this.$axios.post('dev.init')
                 user.setUser(data.response.user)
-                game.setState('genre',data.response.categories)
-                game.setState('mediaTypes',data.response.media_types)
+                game.setState('genre', data.response.categories)
+                media.setState('mediaTypes', data.response.media_types)
             }
         }
     }

@@ -1,10 +1,10 @@
 <script setup>
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import LogoIcon from "@/components/icons/LogoIcon.vue";
-import VInput from "@/components/ui/form-elements/VInput.vue"
-import MainButton from "@/components/ui/buttons/MainButton.vue";
-import {useAuthStore} from "@/stores/auth";
+import LogoIcon from '@/components/icons/LogoIcon.vue'
+import VInput from '@/components/ui/form-elements/VInput.vue'
+import MainButton from '@/components/ui/buttons/MainButton.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const email = ref('')
 const password = ref('')
@@ -12,13 +12,14 @@ const router = useRouter()
 
 const auth = useAuthStore()
 
-const signIn = async ()=>{
+const signIn = async () => {
     let params = {
-        emailorphone:email.value,
-        pass:password.value,
+        emailorphone: email.value,
+        pass: password.value
     }
-    try{
+    try {
         await auth.signIn(params)
+        await auth.checkLogged()
         await router.push('/')
     } catch (e) {
         console.error(e)
@@ -30,7 +31,7 @@ const signIn = async ()=>{
     <div class="auth-content">
         <div class="auth">
             <div class="header-logo">
-                <logo-icon/>
+                <logo-icon />
             </div>
             <form @submit.prevent="signIn" class="form">
                 <v-input @update:modelValue="email = $event">E-mail or Phone</v-input>
@@ -44,5 +45,5 @@ const signIn = async ()=>{
 </template>
 
 <style scoped lang="scss">
-@import "./scss/auth.scss";
+@import './scss/auth.scss';
 </style>
