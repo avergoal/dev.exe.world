@@ -1,11 +1,17 @@
 <script setup>
 import AddIcon from '@/components/icons/AddIcon.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
+import router from "@/router";
+
+
+const toRoute = (name) => {
+    router.push({ name })
+}
 </script>
 <template>
     <div class="content">
         <div class="illustration">
-            <img src="../assets/images/relax.svg" alt="" />
+            <img src="../assets/images/relax.svg" alt=""/>
         </div>
         <div class="context">
             <h1>Hosting browser games</h1>
@@ -18,7 +24,8 @@ import MainButton from '@/components/ui/buttons/MainButton.vue'
             <div class="block">
                 <div class="block-item">
                     <router-link :to="{ name: 'Documentation' }" class="sub-1"
-                        >Documentation</router-link
+                    >Documentation
+                    </router-link
                     >
                     <p class="b-2-regular">
                         A detailed description of the process and conditions for placing games on
@@ -46,8 +53,11 @@ import MainButton from '@/components/ui/buttons/MainButton.vue'
                 </div>
             </div>
             <div class="buttons">
-                <main-button :icon="true"> <add-icon />add game </main-button>
-                <main-button :secondary="true"> my games </main-button>
+                <main-button :icon="true" @click="toRoute('MyGamesAdd')">
+                    <add-icon/>
+                    add game
+                </main-button>
+                <main-button :secondary="true" @click="toRoute('MyGames')"> my games</main-button>
             </div>
         </div>
     </div>

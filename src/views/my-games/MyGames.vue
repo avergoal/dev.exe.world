@@ -6,6 +6,12 @@ import router from '@/router'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import { useGameStore } from '@/stores/game'
 
+
+onMounted(() => {
+    gameStore.actionGetGames()
+})
+
+
 const gameStore = useGameStore()
 
 const games = computed(() => {
@@ -15,13 +21,10 @@ const games = computed(() => {
 const toAdd = () => {
     router.push({ name: 'MyGamesAdd' })
 }
+
 const toGame = (id) => {
     router.push({ name: 'GameInfo', params: { id } })
 }
-
-onMounted(() => {
-    gameStore.actionGetGames()
-})
 </script>
 <template>
     <div class="content" :class="{ empty: !games.length }">
