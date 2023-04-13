@@ -29,6 +29,11 @@
             margin-bottom: 8px;
             width: 317px;
             height: 196px;
+            img {
+                width: inherit;
+                height: inherit;
+                border-radius: 16px;
+            }
         }
 
         .sub-1 {
