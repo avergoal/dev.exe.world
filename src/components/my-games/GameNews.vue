@@ -8,16 +8,13 @@ import MainButton from '@/components/ui/buttons/MainButton.vue'
 import VSearchInput from '@/components/ui/form-elements/VSearchInput.vue'
 import PlusIcon from '@/components/icons/PlusIcon.vue'
 
-
 onMounted(async () => {
     await gameStore.actionGetGameNews(gameId.value)
 })
 
-
 const modal = useModalStore()
 const route = useRoute()
 const gameStore = useGameStore()
-
 
 const gameId = computed(() => route.params.id)
 const getGameNews = computed(() => gameStore.getGameNews)

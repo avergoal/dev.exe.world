@@ -9,7 +9,7 @@ export const useGameStore = defineStore('game', {
         gameStatistics: Object,
         gameNews: Object,
         gameIcon: String,
-        gameNewsById:Object
+        gameNewsById: Object
     }),
     getters: {
         getGames: (state) => state.games,
@@ -19,7 +19,7 @@ export const useGameStore = defineStore('game', {
         getGameStatistics: (state) => state.gameStatistics,
         getGameNews: (state) => state.gameNews,
         getGameIcon: (state) => state.gameIcon,
-        getGameNewsById: (state) => state.gameNewsById,
+        getGameNewsById: (state) => state.gameNewsById
     },
     actions: {
         setState(type, value) {
@@ -60,14 +60,14 @@ export const useGameStore = defineStore('game', {
             this.gameNews = data.response.news
         },
         async actionGetGameNewsById(id) {
-            const { data } = await this.$axios.post('dev.game.news.info', {id} )
+            const { data } = await this.$axios.post('dev.game.news.info', { id })
             this.gameNewsById = data.response.result
         },
         async addGameNews(params) {
             const { data } = await this.$axios.post('dev.game.news.save', params)
             console.log(data)
         },
-        async deleteNews(params){
+        async deleteNews(params) {
             await this.$axios.post('dev.game.news.delete', params)
         }
     }

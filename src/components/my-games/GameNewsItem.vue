@@ -2,29 +2,25 @@
 import EditIcon from '@/components/icons/EditIcon.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
-import {computed} from 'vue'
-import {useGameStore} from '@/stores/game'
-import {useModalStore} from "@/stores/modal";
-import {useRoute} from "vue-router";
-
+import { computed } from 'vue'
+import { useGameStore } from '@/stores/game'
+import { useModalStore } from '@/stores/modal'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
     news: Object
 })
 
-
 const gameStore = useGameStore()
 const modalStore = useModalStore()
 const route = useRoute()
-
 
 const getGameIcon = computed(() => gameStore.getGameIcon)
 
 const gameId = computed(() => route.params.id)
 
-
 const editNews = () => {
-    modalStore.toggleModal({open: true, target: 'add-news', data: {nid: props.news.id}})
+    modalStore.toggleModal({ open: true, target: 'add-news', data: { nid: props.news.id } })
 }
 
 const deleteNews = async () => {
@@ -40,7 +36,7 @@ const deleteNews = async () => {
 <template>
     <div class="news-item">
         <div class="image">
-            <img :src="getGameIcon" alt=""/>
+            <img :src="getGameIcon" alt="" />
         </div>
         <div class="news">
             <div class="header">
@@ -49,8 +45,8 @@ const deleteNews = async () => {
                 </div>
                 <div class="buttons">
                     <!--                    <span class="b-2-bold"> Publish Now </span>-->
-                    <edit-icon @click="editNews"/>
-                    <delete-icon @click="deleteNews"/>
+                    <edit-icon @click="editNews" />
+                    <delete-icon @click="deleteNews" />
                 </div>
             </div>
             <div class="description b-1-regular">
