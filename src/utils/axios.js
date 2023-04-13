@@ -32,7 +32,6 @@ instance.interceptors.response.use(
         return response
     },
     (error) => {
-        console.log(error.response.data.error)
         if (
             error.response.data.error === 'user_not_logged_in' ||
             error.response.data.error === 'token_expired'

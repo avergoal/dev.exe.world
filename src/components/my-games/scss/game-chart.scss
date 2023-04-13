@@ -41,12 +41,38 @@
                 min-height: 77px;
                 width: 77px;
 
-                .time {
-                    color: var(--grey-primary);
+
+                &:hover  .chart-tooltip {
+                    visibility: visible;
+                }
+
+
+                .chart-tooltip {
+                    visibility: hidden;
+                    max-width: 272px;
+                    min-width: 32px;
+                    width: max-content;
+                    background-color: var(--black-90);
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 4px 10px 8px;
                     position: absolute;
-                    top: 8px;
+                    z-index: 1;
+                    top: -5px;
                     left: 50%;
-                    transform: translateX(-50%);
+                    transform: translateY(-100%) translateX(-50%);
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 100%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        border-width: 5px;
+                        border-style: solid;
+                        border-color: var(--black-90) transparent transparent transparent;
+                    }
                 }
             }
         }

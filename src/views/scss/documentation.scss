@@ -1,8 +1,58 @@
-.content {
+.documentation-content {
     padding: 32px 246px 0 25px;
     display: flex;
     gap: 127px;
-    .context {
+    .documentation-context {
         padding-top: 8px;
+        font-size: 16px;
+        letter-spacing: 0.001em;
+        line-height: 28px;
+        font-weight: 400;
+        font-family: var(--font-raleway);
+        h1 {
+            color: var(--black-primary);
+            margin-bottom: 40px;
+        }
+        ul {
+            padding-left: 18px;
+            margin-top: 30px;
+
+            li {
+                position: relative;
+                list-style-type: none;
+
+                &:before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 5px;
+                    height: 5px;
+                    background: black;
+                    border-radius: 50%;
+                    left: -15px;
+                }
+            }
+        }
+
+        ol{
+            padding-left: 18px;
+            margin-top: 30px;
+        }
+
+        a{
+            display: flex;
+            margin-top: 30px;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.0015em;
+            color: var(--violet-primary);
+            &:after{
+                content: url("@/assets/images/icons/href_right_icon.svg");
+                font-size: 35px;
+            }
+        }
     }
 }

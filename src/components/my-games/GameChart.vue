@@ -17,10 +17,12 @@ const maxValue = computed(() => {
             <div class="chart">
                 <div
                     class="chart-item"
-                    :style="`height:${(240 / maxValue) * chart.value}px`"
+                    :style="`height:${(240 / maxValue) * chart.value + 77}px`"
                     :key="chart.time"
                     v-for="chart in props.charts"
-                ></div>
+                >
+                    <span class="chart-tooltip">{{chart.value}}</span>
+                </div>
             </div>
             <div class="time">
                 <div class="time-item c-1-regular" :key="chart.time" v-for="chart in props.charts">

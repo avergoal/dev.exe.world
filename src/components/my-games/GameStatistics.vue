@@ -38,7 +38,7 @@ const updateChart = ($event) => {
         <div class="charts">
             <div class="item" :key="key" v-for="(statistic, key) in statistics">
                 <div class="header">
-                    <h4>Install history</h4>
+                    <h4>{{ key }} history</h4>
                     <p class="b-1-medium">04.12.2021</p>
                 </div>
                 <game-chart :charts="statistic" />
