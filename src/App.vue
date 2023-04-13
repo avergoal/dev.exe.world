@@ -16,6 +16,7 @@ onMounted(() => {
     auth.checkLogged()
     app.init()
 })
+
 </script>
 <template>
     <template v-if="isLogged">
