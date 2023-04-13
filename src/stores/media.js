@@ -11,7 +11,7 @@ export const useMediaStore = defineStore('media', {
         setState(type, value) {
             this[type] = value
         },
-        uploadMedia(image, params, onUploadProgress) {
+        uploadMedia(image, params) {
             const formData = new FormData()
             formData.append('file', image)
             Object.keys(params).forEach((key) => {
@@ -20,8 +20,7 @@ export const useMediaStore = defineStore('media', {
             return this.$axios.post('dev.media.upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                },
-                onUploadProgress
+                }
             })
         }
     }

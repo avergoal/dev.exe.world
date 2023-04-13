@@ -32,6 +32,10 @@ aside {
             svg {
                 fill: var(--grey-medium);
             }
+            img {
+                width: inherit;
+                height: inherit;
+            }
         }
 
         .game-name {

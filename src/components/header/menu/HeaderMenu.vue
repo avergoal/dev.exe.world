@@ -1,5 +1,4 @@
 <script setup>
-import GamesIcon from '@/components/icons/GamesIcon.vue'
 import StopIcon from '@/components/icons/StopIcon.vue'
 import { useAuthStore } from '@/stores/auth'
 
@@ -12,12 +11,12 @@ const signOut = async () => {
 
 <template>
     <div class="menu">
-        <div class="menu-item">
-            <div class="icon">
-                <games-icon />
-            </div>
-            <div class="sub-2">Go to Exe Profile</div>
-        </div>
+        <!--        <div class="menu-item">-->
+        <!--            <div class="icon">-->
+        <!--                <games-icon />-->
+        <!--            </div>-->
+        <!--            <div class="sub-2">Go to Exe Profile</div>-->
+        <!--        </div>-->
         <div class="menu-item" @click="signOut">
             <div class="icon">
                 <stop-icon />

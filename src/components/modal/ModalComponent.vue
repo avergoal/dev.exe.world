@@ -2,13 +2,18 @@
 import { useModalStore } from '@/stores/modal'
 import ModalAddNews from '@/components/modal/ModalAddNews.vue'
 import ModalAddAdministrators from '@/components/modal/ModalAddAdministrators.vue'
+import {computed} from "vue";
 
-const modal = useModalStore()
+
+const modalStore = useModalStore()
+
+
+const getModal = computed(()=>modalStore.getModal)
 </script>
 <template>
-    <div class="modal" :class="{ open: modal.modal.open }" @click.self="modal.toggleModal({})">
-        <modal-add-news v-if="modal.modal.target === 'add-news'" />
-        <modal-add-administrators v-if="modal.modal.target === 'add-administrators'" />
+    <div class="modal" :class="{ open: getModal.open }" @click.self="modalStore.toggleModal({})">
+        <modal-add-news v-if="getModal.target === 'add-news'" />
+        <modal-add-administrators v-if="getModal.target === 'add-administrators'" />
     </div>
 </template>
 

@@ -32,16 +32,6 @@ onMounted(() => {
     }
 })
 
-watch(
-    () => props.inputValue,
-    (newValue) => {
-        if (newValue) {
-            emit('update:modelValue', newValue)
-            value.value = newValue
-        }
-    }
-)
-
 const vInput = ref(null)
 const type = ref('text')
 const value = ref('')
@@ -57,6 +47,16 @@ const changeType = () => {
 const onInput = (event) => {
     emit('update:modelValue', event.target.value)
 }
+
+watch(
+    () => props.inputValue,
+    (newValue) => {
+        if (newValue) {
+            emit('update:modelValue', newValue)
+            value.value = newValue
+        }
+    }
+)
 </script>
 <template>
     <fieldset @click="focus">

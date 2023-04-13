@@ -1,12 +1,26 @@
 <script setup>
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGameStore } from '@/stores/game'
+import { useModalStore } from '@/stores/modal'
 import GameNewsItem from '@/components/my-games/GameNewsItem.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import VSearchInput from '@/components/ui/form-elements/VSearchInput.vue'
 import PlusIcon from '@/components/icons/PlusIcon.vue'
-import { useModalStore } from '@/stores/modal'
 
-const news = true
+
+onMounted(async () => {
+    await gameStore.actionGetGameNews(gameId.value)
+})
+
+
 const modal = useModalStore()
+const route = useRoute()
+const gameStore = useGameStore()
+
+
+const gameId = computed(() => route.params.id)
+const getGameNews = computed(() => gameStore.getGameNews)
 </script>
 <template>
     <div class="news-content">
@@ -14,7 +28,7 @@ const modal = useModalStore()
             <h1>News</h1>
             <main-button
                 :icon="true"
-                v-if="news"
+                v-if="getGameNews.length"
                 @click="modal.toggleModal({ open: true, target: 'add-news' })"
             >
                 <plus-icon />
@@ -22,13 +36,16 @@ const modal = useModalStore()
             </main-button>
         </div>
 
-        <div class="empty-news" v-if="!news">
+        <div class="empty-news" v-if="!getGameNews.length">
             <div class="image">
                 <img src="../../assets/images/news.svg" alt="" />
             </div>
             <h2>You haven't added any news yet</h2>
             <p class="b-1-regular">Add your first news and share with your players</p>
-            <main-button :icon="true">
+            <main-button
+                :icon="true"
+                @click="modal.toggleModal({ open: true, target: 'add-news' })"
+            >
                 <plus-icon />
                 add news
             </main-button>
@@ -38,26 +55,8 @@ const modal = useModalStore()
                 <v-search-input :placeholder="'Search news'" />
             </div>
             <div class="news-items">
-                <h3>Awaiting publication</h3>
-                <game-news-item
-                    title="Imperial Hero II"
-                    description="A new Sword of Power is already waiting for you"
-                />
-                <game-news-item
-                    title="Imperial Hero II"
-                    description="A new Sword of Power is already waiting for you"
-                />
-            </div>
-            <div class="news-items">
-                <h3>Awaiting publication</h3>
-                <game-news-item
-                    title="Imperial Hero II"
-                    description="A new Sword of Power is already waiting for you"
-                />
-                <game-news-item
-                    title="Imperial Hero II"
-                    description="A new Sword of Power is already waiting for you"
-                />
+                <h3>Publications</h3>
+                <game-news-item v-for="news in getGameNews" :key="news.id" :news="news" />
             </div>
         </div>
     </div>

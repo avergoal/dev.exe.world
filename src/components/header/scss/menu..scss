@@ -1,7 +1,7 @@
 .menu {
     position: absolute;
     box-shadow: 0 40px 67px rgba(0, 0, 0, 0.17), 0 6.3px 14.9653px rgba(0, 0, 0, 0.0949616),
-        0px 1px 4.45557px rgba(0, 0, 0, 0.0648379);
+        0 1px 4.45557px rgba(0, 0, 0, 0.0648379);
     border-radius: 12px;
     padding: 16px;
     background: var(--white-primary);
@@ -12,6 +12,7 @@
     flex-direction: column;
     gap: 16px;
     z-index: 10;
+    min-width: 183px;
 
     .menu-item {
         display: flex;

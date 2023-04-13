@@ -13,7 +13,7 @@ import router from '@/router'
 const title = ref('')
 const description = ref('')
 const type = ref('')
-let agree = ref(false)
+const agree = ref(false)
 
 const gameStore = useGameStore()
 

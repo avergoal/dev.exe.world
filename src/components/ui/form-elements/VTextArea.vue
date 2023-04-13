@@ -16,16 +16,6 @@ onMounted(() => {
     }
 })
 
-watch(
-    () => props.inputValue,
-    (newValue) => {
-        if (newValue) {
-            emit('update:modelValue', newValue)
-            value.value = newValue
-        }
-    }
-)
-
 const vTextArea = ref(null)
 const value = ref('')
 
@@ -38,6 +28,16 @@ const focus = () => {
 const onInput = (event) => {
     emit('update:modelValue', event.target.value)
 }
+
+watch(
+    () => props.inputValue,
+    (newValue) => {
+        if (newValue) {
+            emit('update:modelValue', newValue)
+            value.value = newValue
+        }
+    }
+)
 </script>
 
 <template>

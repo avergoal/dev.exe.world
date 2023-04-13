@@ -1,13 +1,21 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useMediaStore } from '@/stores/media'
 import PlusIcon from '@/components/icons/PlusIcon.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
-import { useRoute } from 'vue-router'
+import CoverLoadingIcon from '@/components/icons/CoverLoadingIcon.vue'
 
 const props = defineProps({
     type: {
         default: 'carousel'
+    },
+    src: String
+})
+
+onMounted(() => {
+    if (props.src) {
+        preloadSrc.value = props.src
     }
 })
 
@@ -15,11 +23,13 @@ const file = ref(null)
 const preloadSrc = ref('')
 const mediaStore = useMediaStore()
 const route = useRoute()
+const loading = ref(false)
 
 const gameId = computed(() => route.params.id)
-const mediaTypeId = computed(() => {
-    return Object.values(mediaStore.getMediaTypes).find((item) => item.code === props.type).id
-})
+const getMediaTypes = computed(() => mediaStore.getMediaTypes)
+const mediaType = computed(() =>
+    Object.values(getMediaTypes.value).find((media) => media.code === props.type)
+)
 
 const inputClick = () => {
     file.value.click()
@@ -29,27 +39,42 @@ const uploadImage = (e) => {
     const image = e.target.files[0]
     let params = {
         gid: gameId.value,
-        type: mediaTypeId.value
+        type: props.type
+    }
+    let tmpSrc
+    if (preloadSrc.value) {
+        tmpSrc = preloadSrc.value
     }
     if (image) {
         const reader = new FileReader()
         reader.onload = () => {
             preloadSrc.value = reader.result
+            loading.value = true
             mediaStore
-                .uploadMedia(image, params, (progressEvent) => {
-                    const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100)
-                    console.log(`Upload progress: ${progress}%`)
-                })
+                .uploadMedia(image, params)
                 .then((response) => {
                     console.log('Upload successful:', response.data)
                 })
                 .catch((error) => {
                     console.error('Upload error:', error)
+                    preloadSrc.value = tmpSrc
+                })
+                .finally(() => {
+                    loading.value = false
                 })
         }
         reader.readAsDataURL(image)
     }
 }
+
+watch(
+    () => props.src,
+    (newValue) => {
+        if (newValue) {
+            preloadSrc.value = newValue
+        }
+    }
+)
 </script>
 <template>
     <div class="cover">
@@ -66,23 +91,30 @@ const uploadImage = (e) => {
                 @change="uploadImage"
                 type="file"
             />
-            <img :src="preloadSrc" :alt="preloadSrc" v-if="preloadSrc" class="preload-image" />
+            <cover-loading-icon class="loading" v-if="loading" />
+            <img
+                :src="preloadSrc"
+                :class="{ blur: loading }"
+                :alt="preloadSrc"
+                v-if="preloadSrc"
+                class="preload-image"
+            />
         </label>
         <div class="info">
             <div class="text">
                 <p v-if="props.type === 'carousel'" class="sub-1">Feautered cover</p>
                 <p v-if="props.type === 'carousel'" class="b-2-regular">
-                    960x480. Used in the site's main carousel
+                    {{ mediaType?.w }}x{{ mediaType?.h }}. Used in the site's main carousel
                 </p>
 
                 <p v-if="props.type === 'cover'" class="sub-1">Catalogue cover</p>
                 <p v-if="props.type === 'cover'" class="b-2-regular">
-                    414x256. Used in the catalog showcase
+                    {{ mediaType?.w }}x{{ mediaType?.h }}. Used in the catalog showcase
                 </p>
 
                 <p v-if="props.type === 'icon'" class="sub-1">Game icon</p>
                 <p v-if="props.type === 'icon'" class="b-2-regular">
-                    44x44. Used in the menu panel
+                    {{ mediaType?.w }}x{{ mediaType?.h }}. Used in the menu panel
                 </p>
             </div>
             <div class="button">

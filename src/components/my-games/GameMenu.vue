@@ -1,14 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 import GamesIcon from '@/components/icons/GamesIcon.vue'
+import { useGameStore } from '@/stores/game'
 
-const noImage = ref(true)
+const gameStore = useGameStore()
+
+const getGameIcon = computed(() => gameStore.getGameIcon)
 </script>
 <template>
     <aside>
         <div class="game-header">
-            <div class="game-image" :class="{ background: noImage }">
-                <games-icon v-if="noImage" />
+            <div class="game-image" :class="{ background: !getGameIcon }">
+                <games-icon v-if="!getGameIcon" />
+                <img v-else :src="getGameIcon" alt="" />
             </div>
             <div class="game-name sub-1">Imperial Hero II</div>
         </div>

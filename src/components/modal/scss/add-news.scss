@@ -21,7 +21,7 @@
         }
         .buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             .action {
                 display: flex;
                 gap: 8px;

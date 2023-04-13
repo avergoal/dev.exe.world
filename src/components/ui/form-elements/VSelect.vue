@@ -8,26 +8,18 @@ const props = defineProps({
     data: null,
     showSelect: String,
     idType: String,
-    selectedValue: Number
+    selectedValue: Number,
+    findValue: String
 })
 
 onMounted(() => {
     if (props.selectedValue) {
-        selected.value = props.data.find((item) => item.cid === props.selectedValue)[
+        selected.value = props.data.find((item) => item[props.findValue] === props.selectedValue)[
             props.showSelect
         ]
+        emit('update:modelValue', props.selectedValue)
     }
 })
-
-watch(
-    () => props.selectedValue,
-    (newValue) => {
-        if (newValue) {
-            selected.value = props.data.find((item) => item.cid === newValue)[props.showSelect]
-            emit('update:modelValue', newValue)
-        }
-    }
-)
 
 const open = ref(false)
 const selected = ref('')
@@ -53,6 +45,18 @@ const closeSelect = (e) => {
         document.removeEventListener('click', closeSelect)
     }
 }
+
+watch(
+    () => props.selectedValue,
+    (newValue) => {
+        if (newValue) {
+            selected.value = props.data.find((item) => item[props.findValue] === newValue)[
+                props.showSelect
+            ]
+            emit('update:modelValue', newValue)
+        }
+    }
+)
 </script>
 
 <template>
