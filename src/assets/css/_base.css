@@ -9,7 +9,8 @@
 }
 
 body {
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 791px;
     font-family: var(--font-raleway), Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-style: normal;
@@ -17,7 +18,8 @@ body {
 
 main {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 791px;
     flex-direction: column;
 }
 
