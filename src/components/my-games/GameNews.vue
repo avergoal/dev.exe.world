@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGameStore } from '@/stores/game'
+import { useNewsStore } from '@/stores/news'
 import { useModalStore } from '@/stores/modal'
 import GameNewsItem from '@/components/my-games/GameNewsItem.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
@@ -9,15 +9,15 @@ import VSearchInput from '@/components/ui/form-elements/VSearchInput.vue'
 import PlusIcon from '@/components/icons/PlusIcon.vue'
 
 onMounted(async () => {
-    await gameStore.actionGetGameNews(gameId.value)
+    await newsStore.actionGetNews(gameId.value)
 })
 
 const modal = useModalStore()
 const route = useRoute()
-const gameStore = useGameStore()
+const newsStore = useNewsStore()
 
 const gameId = computed(() => route.params.id)
-const getGameNews = computed(() => gameStore.getGameNews)
+const getNews = computed(() => newsStore.getNews)
 </script>
 <template>
     <div class="news-content">
@@ -25,7 +25,7 @@ const getGameNews = computed(() => gameStore.getGameNews)
             <h1>News</h1>
             <main-button
                 :icon="true"
-                v-if="getGameNews.length"
+                v-if="getNews.length"
                 @click="modal.toggleModal({ open: true, target: 'add-news' })"
             >
                 <plus-icon />
@@ -33,7 +33,7 @@ const getGameNews = computed(() => gameStore.getGameNews)
             </main-button>
         </div>
 
-        <div class="empty-news" v-if="!getGameNews.length">
+        <div class="empty-news" v-if="!getNews.length">
             <div class="image">
                 <img src="../../assets/images/news.svg" alt="" />
             </div>
@@ -53,7 +53,7 @@ const getGameNews = computed(() => gameStore.getGameNews)
             </div>
             <div class="news-items">
                 <h3>Publications</h3>
-                <game-news-item v-for="news in getGameNews" :key="news.id" :news="news" />
+                <game-news-item v-for="news in getNews" :key="news.id" :news="news" />
             </div>
         </div>
     </div>

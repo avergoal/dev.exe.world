@@ -7,9 +7,7 @@ export const useGameStore = defineStore('game', {
         gameInfo: Object,
         gameSettings: Object,
         gameStatistics: Object,
-        gameNews: Object,
-        gameIcon: String,
-        gameNewsById: Object
+        gameIcon: String
     }),
     getters: {
         getGames: (state) => state.games,
@@ -17,9 +15,7 @@ export const useGameStore = defineStore('game', {
         getGameInfo: (state) => state.gameInfo,
         getGameSettings: (state) => state.gameSettings,
         getGameStatistics: (state) => state.gameStatistics,
-        getGameNews: (state) => state.gameNews,
-        getGameIcon: (state) => state.gameIcon,
-        getGameNewsById: (state) => state.gameNewsById
+        getGameIcon: (state) => state.gameIcon
     },
     actions: {
         setState(type, value) {
@@ -31,6 +27,9 @@ export const useGameStore = defineStore('game', {
                 el.genre = this.genre.find((item) => item.cid === parseInt(el.type)).title
                 return el
             })
+        },
+        resetGameInfo() {
+            this.gameInfo = {}
         },
         async addGamed(params) {
             await this.$axios.post('dev.new_game.save', params)
@@ -54,21 +53,6 @@ export const useGameStore = defineStore('game', {
         async actionGetGameStatistics(params) {
             const { data } = await this.$axios.post('dev.game.statistics', params)
             this.gameStatistics = data.response.statistics
-        },
-        async actionGetGameNews(gid) {
-            const { data } = await this.$axios.post('dev.game.news', { gid })
-            this.gameNews = data.response.news
-        },
-        async actionGetGameNewsById(id) {
-            const { data } = await this.$axios.post('dev.game.news.info', { id })
-            this.gameNewsById = data.response.result
-        },
-        async addGameNews(params) {
-            const { data } = await this.$axios.post('dev.game.news.save', params)
-            console.log(data)
-        },
-        async deleteNews(params) {
-            await this.$axios.post('dev.game.news.delete', params)
         }
     }
 })

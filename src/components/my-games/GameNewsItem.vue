@@ -4,6 +4,7 @@ import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import { computed } from 'vue'
 import { useGameStore } from '@/stores/game'
+import { useNewsStore } from '@/stores/news'
 import { useModalStore } from '@/stores/modal'
 import { useRoute } from 'vue-router'
 
@@ -12,6 +13,7 @@ const props = defineProps({
 })
 
 const gameStore = useGameStore()
+const newsStore = useNewsStore()
 const modalStore = useModalStore()
 const route = useRoute()
 
@@ -28,8 +30,8 @@ const deleteNews = async () => {
         id: props.news.id,
         delete_code: props.news.delete_code
     }
-    await gameStore.deleteNews(params)
-    await gameStore.actionGetGameNews(gameId.value)
+    await newsStore.deleteNews(params)
+    await newsStore.actionGetNews(gameId.value)
 }
 </script>
 

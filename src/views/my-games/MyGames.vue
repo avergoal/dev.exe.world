@@ -6,11 +6,10 @@ import router from '@/router'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import { useGameStore } from '@/stores/game'
 
-
 onMounted(() => {
+    gameStore.resetGameInfo()
     gameStore.actionGetGames()
 })
-
 
 const gameStore = useGameStore()
 

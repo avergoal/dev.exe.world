@@ -1,7 +1,7 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGameStore } from '@/stores/game'
+import { useNewsStore } from '@/stores/news'
 import { useModalStore } from '@/stores/modal'
 import ModalCloseButton from '@/components/modal/ModalCloseButton.vue'
 import VInput from '@/components/ui/form-elements/VInput.vue'
@@ -10,12 +10,17 @@ import MainButton from '@/components/ui/buttons/MainButton.vue'
 
 onMounted(async () => {
     if (getModal.value.data) {
-        console.log(getModal.value.data)
-        await gameStore.actionGetGameNewsById(getModal.value.data.nid)
+        await newsStore.actionGetNewsById(getModal.value.data.nid)
     }
 })
 
-const gameStore = useGameStore()
+onUnmounted(() => {
+    if (getModal.value.data) {
+        newsStore.resetNewsById()
+    }
+})
+
+const newsStore = useNewsStore()
 const modalStore = useModalStore()
 const route = useRoute()
 const title = ref('')
@@ -27,7 +32,7 @@ const gameId = computed(() => route.params.id)
 
 const getModal = computed(() => modalStore.getModal)
 
-const getGameNewsById = computed(() => gameStore.getGameNewsById)
+const getNewsById = computed(() => newsStore.getNewsById)
 
 const addGameNews = async () => {
     let params = {
@@ -40,8 +45,8 @@ const addGameNews = async () => {
     if (getModal.value.data?.nid) {
         params.nid = getModal.value.data.nid
     }
-    await gameStore.addGameNews(params)
-    await gameStore.actionGetGameNews(gameId.value)
+    await newsStore.addNews(params)
+    await newsStore.actionGetNews(gameId.value)
     modalStore.toggleModal({})
 }
 </script>
@@ -50,20 +55,20 @@ const addGameNews = async () => {
         <modal-close-button />
         <h3>Add News</h3>
         <div class="form">
-            <v-input :input-value="getGameNewsById?.title" @update:modelValue="title = $event"
-                >Title</v-input
-            >
+            <v-input :input-value="getNewsById?.title" @update:modelValue="title = $event"
+                >Title
+            </v-input>
             <v-text-area
-                :input-value="getGameNewsById?.description"
+                :input-value="getNewsById?.description"
                 @update:modelValue="description = $event"
-                >Description</v-text-area
-            >
-            <v-input :input-value="getGameNewsById?.params" @update:modelValue="additional = $event"
-                >Additional url parameters:</v-input
-            >
-            <v-input :input-value="getGameNewsById?.button" @update:modelValue="button = $event"
-                >Primary button text</v-input
-            >
+                >Description
+            </v-text-area>
+            <v-input :input-value="getNewsById?.params" @update:modelValue="additional = $event"
+                >Additional url parameters:
+            </v-input>
+            <v-input :input-value="getNewsById?.button" @update:modelValue="button = $event"
+                >Primary button text
+            </v-input>
             <div class="from-buttons">
                 <!--                <v-input :toggle="true">Secondary button text</v-input>-->
             </div>

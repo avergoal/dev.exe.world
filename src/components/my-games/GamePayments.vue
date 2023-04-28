@@ -1,73 +1,87 @@
 <script setup>
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePaymentsStore } from '@/stores/payments'
+import { useModalStore } from '@/stores/modal'
 import GameDateFilter from '@/components/my-games/GameDateFilter.vue'
 import GameChart from '@/components/my-games/GameChart.vue'
 import GameTable from '@/components/my-games/GameTable.vue'
 import VSearchInput from '@/components/ui/form-elements/VSearchInput.vue'
 
-const charts = [
-    { height: '144', time: '03:30 pm' },
-    { height: '78', time: '03:30 pm' },
-    { height: '230', time: '03:30 pm' },
-    { height: '182', time: '03:30 pm' },
-    { height: '318', time: '03:30 pm' },
-    { height: '81', time: '03:30 pm' },
-    { height: '278', time: '03:30 pm' },
-    { height: '144', time: '03:30 pm' },
-    { height: '78', time: '03:30 pm' },
-    { height: '230', time: '03:30 pm' },
-    { height: '182', time: '03:30 pm' },
-    { height: '318', time: '03:30 pm' },
-    { height: '81', time: '03:30 pm' },
-    { height: '278', time: '03:30 pm' }
-]
+onMounted(() => {
+    paymentsStore.actionGetPayments(gameId.value)
+    paymentsStore.actionGetPaymentsLog(gameId.value)
+})
 
-const amount = [
-    { id: 'ID39401', amount: '$250.00', transfer: '$220.00' },
-    { id: 'ID39401', amount: '$250.00', transfer: '$220.00' },
-    { id: 'ID39401', amount: '$250.00', transfer: '$220.00' },
-    { id: 'ID39401', amount: '$250.00', transfer: '$220.00' },
-    { id: 'ID39401', amount: '$250.00', transfer: '$220.00' }
-]
-const payment = [
-    { id: 'ID39401', amount: '$250.00', date: '12.03.2021 / 12:34 am' },
-    { id: 'ID39401', amount: '$250.00', date: '12.03.2021 / 12:34 am' },
-    { id: 'ID39401', amount: '$250.00', date: '12.03.2021 / 12:34 am' },
-    { id: 'ID39401', amount: '$250.00', date: '12.03.2021 / 12:34 am' }
-]
+const route = useRoute()
+const paymentsStore = usePaymentsStore()
+const modal = useModalStore()
+const period = ref('day')
+const search = ref('')
+
+const gameId = computed(() => route.params.id)
+const getPayments = computed(() => paymentsStore.getPayments)
+const getPaymentsStats = computed(() => paymentsStore.getPaymentsStats)
+const getPaymentsHistory = computed(() => paymentsStore.getPaymentsHistory)
+
+const updateChart = ($event) => {
+    if (period.value !== $event) {
+        period.value = $event
+        let params = {
+            gid: gameId.value,
+            period: period.value
+        }
+        paymentsStore.actionGetPaymentsStats(params)
+    }
+}
+
+const searchHistory = (param = {}, reset = false) => {
+    let params = {
+        gid: gameId.value,
+        uid: search.value,
+        ...param
+    }
+    paymentsStore.actionGetPaymentsHistory(params, reset)
+}
+
+const updateSearchValue = (e) => {
+    search.value = e
+    searchHistory({}, true)
+}
+
+const loadMore = () => {
+    searchHistory({ offset: getPaymentsHistory.value.offset })
+}
+
+const openLog = (type) => {
+    modal.toggleModal({ open: true, target: 'payments-log', type })
+}
 </script>
 <template>
     <div class="payments">
         <h1>Payments</h1>
         <div class="balance">
             <p class="b-1-regular">Balance</p>
-            <h4>$293,00</h4>
-            <p class="b-1-medium">Payment notification log</p>
+            <h4>${{ getPayments.balance }}</h4>
+            <p class="b-1-medium" @click="openLog">Payment notification log</p>
         </div>
         <div class="charts">
             <div class="item">
                 <div class="header">
                     <h4>Install history</h4>
-                    <p class="b-1-medium">04.12.2021</p>
                 </div>
-                <game-date-filter />
-                <game-chart :charts="charts" />
+                <game-date-filter @update:periodValue="updateChart($event)" />
+                <game-chart :charts="getPaymentsStats" />
             </div>
         </div>
         <div class="payments-tables">
             <div class="table-item">
-                <h4>Amount of payments</h4>
-                <v-search-input placeholder="ID or Username" />
-                <game-table
-                    :data="amount"
-                    :titles="['User', 'Amount of payments', 'To transfer']"
-                />
-            </div>
-            <div class="table-item">
                 <h4>Payment History</h4>
-                <v-search-input placeholder="ID or Username" />
+                <v-search-input @update:modelValue="updateSearchValue" placeholder="ID" />
                 <game-table
-                    :data="payment"
+                    :data="getPaymentsHistory"
                     :titles="['User', 'Amount of payments', 'Date & time']"
+                    @update:data="loadMore"
                 />
             </div>
         </div>

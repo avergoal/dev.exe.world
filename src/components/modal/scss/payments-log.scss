@@ -1,0 +1,31 @@
+.modal-content {
+    min-height: 200px;
+    h3 {
+        margin-bottom: 32px;
+        text-transform: capitalize;
+        color: var(--black-primary);
+    }
+    .payments-log-modal {
+        .table {
+            max-height: 500px;
+            overflow: auto;
+            gap: 8px;
+            display: flex;
+            flex-direction: column;
+            .table-item {
+                display: grid;
+                grid-template-columns: 77px 164px 66px 48px auto;
+                justify-content: space-between;
+                justify-items: start;
+                padding: 0 12px;
+                gap: 12px;
+                .text-content {
+                    overflow-wrap: anywhere;
+                }
+            }
+        }
+    }
+    .empty {
+        text-align: center;
+    }
+}

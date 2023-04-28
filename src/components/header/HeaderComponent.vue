@@ -3,11 +3,10 @@ import { RouterLink } from 'vue-router'
 import { computed, ref } from 'vue'
 import LogoIcon from '@/components/icons/LogoIcon.vue'
 import DropdownIcon from '@/components/icons/DropdownIcon.vue'
-import ContactLogo from '@/components/icons/ContactLogo.vue'
+// import ContactLogo from '@/components/icons/ContactLogo.vue'
 import HeaderMenu from '@/components/header/menu/HeaderMenu.vue'
 import { useUserStore } from '@/stores/user'
 
-const noImage = ref(true)
 const open = ref(false)
 const userStore = useUserStore()
 
@@ -53,9 +52,9 @@ const closeMenu = (e) => {
             </nav>
             <div class="account-section">
                 <div class="account" @click="openMenu" :class="{ open: open }">
-                    <div class="image" :class="{ background: noImage }">
-                        <contact-logo v-if="noImage" />
-                        <img v-else src="../../assets/images/relax.svg" alt="" />
+                    <div class="image" :class="{ background: user.avatar_urls?.x100 }">
+                        <!--                        <contact-logo v-if="noImage" />-->
+                        <img :src="user.avatar_urls?.x100" alt="" />
                     </div>
                     <div class="name b-1-bold">{{ user.user_name }}</div>
                     <div class="drop-icon">

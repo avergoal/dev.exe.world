@@ -13,7 +13,7 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    if (props.selectedValue || props.selectedValue===0) {
+    if (props.selectedValue || props.selectedValue === 0) {
         selected.value = props.data.find((item) => item[props.findValue] === props.selectedValue)[
             props.showSelect
         ]

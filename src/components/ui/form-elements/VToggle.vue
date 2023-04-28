@@ -1,7 +1,17 @@
-<script setup></script>
+<script setup>
+const emit = defineEmits(['update:value'])
+
+const props = defineProps({
+    checked: Boolean
+})
+
+const toggleCheckBox = (e) => {
+    emit('update:value', e.target.checked)
+}
+</script>
 <template>
     <label class="toggle">
-        <input type="checkbox" />
+        <input @change="toggleCheckBox($event)" type="checkbox" :checked="props.checked" />
         <span class="slider"></span>
     </label>
 </template>

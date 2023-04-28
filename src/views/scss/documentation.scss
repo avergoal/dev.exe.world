@@ -36,12 +36,12 @@
             }
         }
 
-        ol{
+        ol {
             padding-left: 18px;
             margin-top: 30px;
         }
 
-        a{
+        a {
             display: flex;
             margin-top: 30px;
             font-weight: 700;
@@ -49,8 +49,8 @@
             line-height: 24px;
             letter-spacing: 0.0015em;
             color: var(--violet-primary);
-            &:after{
-                content: url("@/assets/images/icons/href_right_icon.svg");
+            &:after {
+                content: url('@/assets/images/icons/href_right_icon.svg');
                 font-size: 35px;
             }
         }

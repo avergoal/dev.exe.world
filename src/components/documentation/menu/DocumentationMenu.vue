@@ -1,18 +1,14 @@
 <script setup>
-import {useDocumentationStore} from '@/stores/documentation'
-import {computed, onMounted} from 'vue'
-
+import { useDocumentationStore } from '@/stores/documentation'
+import { computed, onMounted } from 'vue'
 
 onMounted(() => {
     documentation.setDocumentationsMenu()
 })
 
-
 const documentation = useDocumentationStore()
 
-
 const getDocumentation = computed(() => documentation.getDocumentation)
-
 
 const selectMenu = (selected) => {
     documentation.setDocumentationsMenu(selected)

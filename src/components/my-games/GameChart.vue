@@ -21,7 +21,7 @@ const maxValue = computed(() => {
                     :key="chart.time"
                     v-for="chart in props.charts"
                 >
-                    <span class="chart-tooltip">{{chart.value}}</span>
+                    <span class="chart-tooltip">{{ chart.value }}</span>
                 </div>
             </div>
             <div class="time">

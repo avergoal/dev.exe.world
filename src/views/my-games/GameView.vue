@@ -4,16 +4,15 @@ import { computed, onMounted } from 'vue'
 import { useGameStore } from '@/stores/game'
 import { useRoute } from 'vue-router'
 
-onMounted(async () => {
-    await gameStore.actionGetGameInfo(gameId.value)
-})
-
 const route = useRoute()
 const gameStore = useGameStore()
 
 const gameId = computed(() => route.params.id)
-</script>
 
+onMounted(async () => {
+    await gameStore.actionGetGameInfo(gameId.value)
+})
+</script>
 <template>
     <div class="content">
         <game-menu />

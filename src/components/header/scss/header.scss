@@ -65,10 +65,11 @@ header {
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    overflow: hidden;
 
-                    &.background {
-                        background: var(--violet-primary);
-                    }
+                    //&.background {
+                    //    background: var(--violet-primary);
+                    //}
 
                     svg {
                         width: 16px;

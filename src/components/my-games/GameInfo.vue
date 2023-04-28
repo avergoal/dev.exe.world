@@ -15,9 +15,6 @@ onMounted(async () => {
             (item) => item.id === parseInt(file.type)
         ).code
     })
-    if (getGameInfo.value.files?.length) {
-        setImages()
-    }
 })
 
 const route = useRoute()
@@ -59,7 +56,7 @@ const setImages = () => {
 watch(
     () => getGameInfo.value,
     (newValue) => {
-        if (newValue.files.length && getMediaTypes.value) {
+        if (newValue.files?.length && getMediaTypes.value) {
             setImages()
         }
     }

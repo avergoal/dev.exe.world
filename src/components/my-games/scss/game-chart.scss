@@ -41,11 +41,9 @@
                 min-height: 77px;
                 width: 77px;
 
-
-                &:hover  .chart-tooltip {
+                &:hover .chart-tooltip {
                     visibility: visible;
                 }
-
 
                 .chart-tooltip {
                     visibility: hidden;
