@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 <template>
     <router-view v-if="!isLogged"/>
-    <template >
+    <template v-else>
         <main>
             <Header />
             <router-view />
