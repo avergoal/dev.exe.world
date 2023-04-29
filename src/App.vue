@@ -18,7 +18,8 @@ onMounted(() => {
 })
 </script>
 <template>
-    <template v-if="isLogged">
+    <router-view v-if="!isLogged"/>
+    <template >
         <main>
             <Header />
             <router-view />
@@ -26,7 +27,6 @@ onMounted(() => {
         </main>
         <ModalComponent />
     </template>
-    <router-view v-else />
 </template>
 
 <style scoped></style>
