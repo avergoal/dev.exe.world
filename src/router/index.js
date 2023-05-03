@@ -68,6 +68,11 @@ const router = createRouter({
                     component: () => import('@/components/my-games/GameStatistics.vue')
                 },
                 {
+                    path: 'dynamics',
+                    name: 'GameDynamics',
+                    component: () => import('@/components/my-games/GameDynamics.vue')
+                },
+                {
                     path: 'news',
                     name: 'GameNews',
                     component: () => import('@/components/my-games/GameNews.vue')
