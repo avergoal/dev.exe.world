@@ -25,7 +25,9 @@ const getGameInfo = computed(() => gameStore.getGameInfo)
             <router-link :to="{ name: 'GameStatistics' }" class="list-item sub-1"
                 >Statistics</router-link
             >
-            <router-link :to="{ name: 'GameDynamics' }" class="list-item sub-1">Dynamics</router-link>
+            <router-link :to="{ name: 'GameDynamics' }" class="list-item sub-1"
+                >Dynamics</router-link
+            >
             <router-link :to="{ name: 'GameNews' }" class="list-item sub-1">News</router-link>
             <router-link :to="{ name: 'GamePayments' }" class="list-item sub-1"
                 >Payments</router-link

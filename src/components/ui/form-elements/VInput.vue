@@ -21,13 +21,13 @@ const props = defineProps({
         default: false,
         type: Boolean
     },
-    limit:{
-        default:'',
-        type:String
+    limit: {
+        default: '',
+        type: String
     },
-    error:{
-        default:'',
-        type:String
+    error: {
+        default: '',
+        type: String
     }
 })
 
@@ -68,7 +68,7 @@ watch(
 )
 </script>
 <template>
-    <fieldset @click="focus" :class="{error}">
+    <fieldset @click="focus" :class="{ error }">
         <input
             :type="type"
             :disabled="disabled"
@@ -89,7 +89,6 @@ watch(
         </div>
         <span class="c-2-regular error-text" v-if="error">{{ error }}</span>
     </fieldset>
-
 </template>
 
 <style scoped lang="scss">

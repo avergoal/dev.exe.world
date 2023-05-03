@@ -1,9 +1,9 @@
 <script setup>
-import {computed, onMounted, ref, watch} from 'vue'
-import {useRoute} from 'vue-router'
-import {useGameStore} from '@/stores/game'
-import {useMediaStore} from '@/stores/media'
-import {useModalStore} from "@/stores/modal";
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useGameStore } from '@/stores/game'
+import { useMediaStore } from '@/stores/media'
+import { useModalStore } from '@/stores/modal'
 import VInput from '@/components/ui/form-elements/VInput.vue'
 import VSelect from '@/components/ui/form-elements/VSelect.vue'
 import VTextArea from '@/components/ui/form-elements/VTextArea.vue'
@@ -45,7 +45,7 @@ const updateGameInfo = async () => {
         type: type.value
     }
     await gameStore.updateGameInfo(params)
-    modalStore.toggleModal({target: 'success', open: true})
+    modalStore.toggleModal({ target: 'success', open: true })
 }
 
 const setImages = () => {
@@ -70,28 +70,32 @@ watch(
     <div class="info-content">
         <h1>Info</h1>
         <div class="info">
-            <v-input limit="50" :input-value="getGameInfo.title" @update:modelValue="title = $event">
+            <v-input
+                limit="50"
+                :input-value="getGameInfo.title"
+                @update:modelValue="title = $event"
+            >
                 Title
             </v-input>
             <v-text-area
-                    :input-value="getGameInfo.description"
-                    @update:modelValue="description = $event"
+                :input-value="getGameInfo.description"
+                @update:modelValue="description = $event"
             >
                 Description
             </v-text-area>
             <v-select
-                    @update:modelValue="type = $event"
-                    :data="genres"
-                    showSelect="title"
-                    id-type="cid"
-                    :selected-value="parseInt(getGameInfo.type)"
-                    findValue="cid"
-            >Choose genre
+                @update:modelValue="type = $event"
+                :data="genres"
+                showSelect="title"
+                id-type="cid"
+                :selected-value="parseInt(getGameInfo.type)"
+                findValue="cid"
+                >Choose genre
             </v-select>
         </div>
         <h3>Covers</h3>
         <div class="covers">
-            <v-cover-input :type="type" :key="type" :src="files[type]" v-for="type in coverTypes"/>
+            <v-cover-input :type="type" :key="type" :src="files[type]" v-for="type in coverTypes" />
         </div>
         <div class="buttons">
             <main-button @click="updateGameInfo">save changes</main-button>

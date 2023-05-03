@@ -62,7 +62,10 @@ const republish = async () => {
             <!--            <router-link to="">Terms of posting.</router-link>-->
         </div>
         <div class="buttons">
-            <main-button v-if="status.id === 3 || status.id === 4 || status.id === 5" @click="republish">
+            <main-button
+                v-if="status.id === 3 || status.id === 4 || status.id === 5"
+                @click="republish"
+            >
                 Send for verification</main-button
             >
             <!--            <main-button v-if="status === 3"> Unpublish </main-button>-->
