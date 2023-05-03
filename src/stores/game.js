@@ -41,6 +41,7 @@ export const useGameStore = defineStore('game', {
         },
         async updateGameInfo(params) {
             await this.$axios.post('dev.game.info.save', params)
+            await this.actionGetGameInfo(params.gid)
         },
         async actionGetGameSettings(gid) {
             const { data } = await this.$axios.post('dev.game.settings', { gid })

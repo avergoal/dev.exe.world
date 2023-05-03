@@ -20,6 +20,14 @@ const props = defineProps({
     disabled: {
         default: false,
         type: Boolean
+    },
+    limit:{
+        default:'',
+        type:String
+    },
+    error:{
+        default:'',
+        type:String
     }
 })
 
@@ -29,6 +37,7 @@ onMounted(() => {
     }
     if (props.inputValue) {
         value.value = props.inputValue
+        emit('update:modelValue', props.inputValue)
     }
 })
 
@@ -59,7 +68,7 @@ watch(
 )
 </script>
 <template>
-    <fieldset @click="focus">
+    <fieldset @click="focus" :class="{error}">
         <input
             :type="type"
             :disabled="disabled"
@@ -68,6 +77,7 @@ watch(
             ref="vInput"
             class="b-1-regular"
             placeholder=" "
+            :maxlength="props.limit"
         />
         <legend>
             <slot></slot>
@@ -77,7 +87,9 @@ watch(
             <eye-icon v-if="type === 'password'" />
             <eye-closed-icon v-if="type === 'text'" />
         </div>
+        <span class="c-2-regular error-text" v-if="error">{{ error }}</span>
     </fieldset>
+
 </template>
 
 <style scoped lang="scss">

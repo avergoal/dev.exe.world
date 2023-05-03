@@ -9,8 +9,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'Home',
-            component: () => import('@/views/HomeView.vue'),
-            meta: { requiresAuth: true }
+            component: () => import('@/views/HomeView.vue')
         },
         {
             path: '/auth',
@@ -19,21 +18,21 @@ const router = createRouter({
         },
         {
             path: '/documentation',
-            component: () => import('@/views/DocumentationView.vue'),
-            meta: { requiresAuth: true },
-            children: [
-                {
-                    path: '',
-                    name: 'Documentation',
-                    component: () => import('@/components/documentation/DocumentationComponent.vue')
-                },
-                {
-                    path: 'placing',
-                    name: 'Placing',
-                    component: () =>
-                        import('@/components/documentation/PlacingTheGameComponent.vue')
-                }
-            ]
+            name: 'Documentation',
+            component: () => import('@/views/DocumentationView.vue')
+            // children: [
+            //     {
+            //         path: '',
+            //         name: 'Documentation',
+            //         component: () => import('@/components/documentation/DocumentationComponent.vue')
+            //     },
+            //     {
+            //         path: 'placing',
+            //         name: 'Placing',
+            //         component: () =>
+            //             import('@/components/documentation/PlacingTheGameComponent.vue')
+            //     }
+            // ]
         },
         {
             path: '/my-games',
@@ -99,9 +98,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const auth = useAuthStore()
+    const authStore = useAuthStore()
     const isLogged = computed(() => {
-        return auth.getIsLogged
+        return authStore.getIsLogged
     })
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (isLogged.value) {
@@ -110,7 +109,7 @@ router.beforeEach((to, from, next) => {
             next('/auth')
         }
     } else {
-        if (to.name === 'Auth' && auth.isLogged) {
+        if (to.name === 'Auth' && isLogged.value) {
             next('/')
         } else {
             next()

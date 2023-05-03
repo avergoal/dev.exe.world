@@ -7,6 +7,13 @@ fieldset {
     width: 100%;
     cursor: text;
 
+    &.error{
+        border: 1px solid red;
+    }
+    .error-text{
+        color: red;
+    }
+
     legend {
         position: absolute;
         top: 20px;

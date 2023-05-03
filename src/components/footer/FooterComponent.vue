@@ -1,12 +1,14 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+
+const getYear = computed(() => new Date().getFullYear())
+</script>
 <template>
     <footer>
         <div class="footer">
-            <div class="b-2-regular">© 2020 EXE. WORLD | All rights reserved</div>
+            <div class="b-2-regular">© {{ getYear }} EXE. WORLD | All rights reserved</div>
             <nav>
-                <router-link to="">About</router-link>
-                <router-link to="">Help</router-link>
-                <router-link to="">For Developers</router-link>
+                <a href="https://exe.world" target="_blank">Exe.world</a>
             </nav>
         </div>
     </footer>

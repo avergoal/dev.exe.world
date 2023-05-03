@@ -1,15 +1,21 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { computed, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user'
 import LogoIcon from '@/components/icons/LogoIcon.vue'
 import DropdownIcon from '@/components/icons/DropdownIcon.vue'
-// import ContactLogo from '@/components/icons/ContactLogo.vue'
 import HeaderMenu from '@/components/header/menu/HeaderMenu.vue'
-import { useUserStore } from '@/stores/user'
+import MainButton from '@/components/ui/buttons/MainButton.vue'
+import router from '@/router'
 
 const open = ref(false)
 const userStore = useUserStore()
+const authStore = useAuthStore()
 
+const isLogged = computed(() => {
+    return authStore.getIsLogged
+})
 const user = computed(() => {
     return userStore.getUser
 })
@@ -48,10 +54,9 @@ const closeMenu = (e) => {
                     class="button-1"
                     >my games
                 </router-link>
-                <router-link to="/" class="button-1">support</router-link>
             </nav>
             <div class="account-section">
-                <div class="account" @click="openMenu" :class="{ open: open }">
+                <div v-if="isLogged" class="account" @click="openMenu" :class="{ open: open }">
                     <div class="image" :class="{ background: user.avatar_urls?.x100 }">
                         <!--                        <contact-logo v-if="noImage" />-->
                         <img :src="user.avatar_urls?.x100" alt="" />
@@ -61,6 +66,7 @@ const closeMenu = (e) => {
                         <dropdown-icon />
                     </div>
                 </div>
+                <main-button v-else @click="router.push('/auth')">sign in</main-button>
                 <header-menu v-if="open" />
             </div>
         </div>

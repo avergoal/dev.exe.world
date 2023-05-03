@@ -59,6 +59,7 @@ const addGameNews = async () => {
                 >Title
             </v-input>
             <v-text-area
+                limit="200"
                 :input-value="getNewsById?.description"
                 @update:modelValue="description = $event"
                 >Description

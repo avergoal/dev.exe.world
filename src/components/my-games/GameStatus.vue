@@ -18,9 +18,9 @@ const statusStore = useStatusStore()
 const gameId = computed(() => route.params.id)
 const status = computed(() => statusStore.getStatus)
 
-const republish = () => {
-    statusStore.republish(gameId.value)
-    statusStore.actionGetStatus(gameId.value)
+const republish = async () => {
+    await statusStore.republish(gameId.value)
+    await statusStore.actionGetStatus(gameId.value)
 }
 </script>
 <template>
@@ -40,7 +40,7 @@ const republish = () => {
                 <stop-icon />
                 {{ status.title }}
             </p>
-            <p v-if="status.id === 5" class="sub-1 block">
+            <p v-if="status.id === 5 || status.id === 4" class="sub-1 block">
                 <lock-icon />
                 {{ status.title }}
             </p>
@@ -54,7 +54,7 @@ const republish = () => {
             <!--            problems and resubmit your request-->
             {{ status.description }}
         </div>
-        <div v-if="status.id === 5" class="message b-1-regular block">
+        <div v-if="status.id === 5 || status.id === 4" class="message b-1-regular block">
             <!--            To be posted on the Site, the application must be approved by the Site Administration-->
             <!--            and comply with the-->
             {{ status.description }}
@@ -62,7 +62,7 @@ const republish = () => {
             <!--            <router-link to="">Terms of posting.</router-link>-->
         </div>
         <div class="buttons">
-            <main-button v-if="status.id === 3 || status.id === 5" @click="republish">
+            <main-button v-if="status.id === 3 || status.id === 4 || status.id === 5" @click="republish">
                 Send for verification</main-button
             >
             <!--            <main-button v-if="status === 3"> Unpublish </main-button>-->
