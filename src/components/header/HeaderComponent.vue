@@ -8,6 +8,7 @@ import DropdownIcon from '@/components/icons/DropdownIcon.vue'
 import HeaderMenu from '@/components/header/menu/HeaderMenu.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import router from '@/router'
+import { useDocumentationStore } from '@/stores/documentation'
 
 const open = ref(false)
 const userStore = useUserStore()
@@ -35,6 +36,15 @@ const closeMenu = (e) => {
         document.removeEventListener('click', closeMenu)
     }
 }
+const documentation = useDocumentationStore()
+
+const toDocs = () => {
+    documentation.setDocumentationsMenu('index')
+    const currentPath = window.location.pathname
+    if (!currentPath.includes('index')) {
+        history.pushState({}, 'index', 'index')
+    }
+}
 </script>
 <template>
     <header>
@@ -47,6 +57,7 @@ const closeMenu = (e) => {
             <nav>
                 <router-link
                     :to="{ path: '/docs/index' }"
+                    @click="toDocs"
                     class="button-1"
                     :class="{ 'router-link-active': $route.path.startsWith('/docs') }"
                     >documentation

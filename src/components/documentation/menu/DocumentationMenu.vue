@@ -8,7 +8,10 @@ const getDocumentation = computed(() => documentation.getDocumentation)
 
 const selectMenu = async (selected) => {
     await documentation.setDocumentationsMenu(selected)
-    history.pushState({}, '', selected)
+    const currentPath = window.location.pathname
+    if (!currentPath.includes(selected)) {
+        history.pushState({}, selected, selected)
+    }
 }
 </script>
 

@@ -1,19 +1,29 @@
 <script setup>
 import DocumentationMenu from '@/components/documentation/menu/DocumentationMenu.vue'
 import { useDocumentationStore } from '@/stores/documentation'
-import { computed, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 onMounted(() => {
     let lastPart = {}
     if (route.path === '/docs') {
-        history.pushState({}, '', 'docs/index')
+        const currentPath = window.location.pathname
+        if (!currentPath.includes('docs/index')) {
+            history.pushState({}, 'index', 'docs/index')
+        }
     } else {
         lastPart = getUrlWithParams().lastPart
-        history.pushState({}, '', lastPart)
+        const currentPath = window.location.pathname
+        if (!currentPath.includes(lastPart)) {
+            history.pushState({}, lastPart, lastPart)
+        }
     }
     documentation.setDocumentationsMenu(lastPart)
     window.addEventListener('popstate', handlePopstate)
+})
+
+onBeforeUnmount(() => {
+    window.removeEventListener('popstate', handlePopstate)
 })
 
 const documentation = useDocumentationStore()
@@ -31,7 +41,7 @@ const route = useRoute()
 const handleClick = (e) => {
     if (e.target.tagName === 'A') {
         let { url, lastPart } = getUrlWithParams(e)
-        history.pushState({}, '', url)
+        history.pushState({}, lastPart, url)
         e.preventDefault()
         selectMenu(lastPart)
     }
