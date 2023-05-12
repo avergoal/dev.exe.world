@@ -8,7 +8,7 @@ const getDocumentation = computed(() => documentation.getDocumentation)
 
 const selectMenu = async (selected) => {
     await documentation.setDocumentationsMenu(selected)
-    history.replaceState({}, '', selected)
+    history.pushState({}, '', selected)
 }
 </script>
 
