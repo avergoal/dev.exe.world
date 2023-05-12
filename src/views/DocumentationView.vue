@@ -1,8 +1,8 @@
 <script setup>
 import DocumentationMenu from '@/components/documentation/menu/DocumentationMenu.vue'
-import {useDocumentationStore} from '@/stores/documentation'
-import {computed, onMounted} from 'vue'
-import {useRoute} from 'vue-router'
+import { useDocumentationStore } from '@/stores/documentation'
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 onMounted(() => {
     let lastPart = {}
@@ -22,13 +22,14 @@ const getSelected = computed(() => documentation.getSelected)
 const selected = computed(
     () => getDocumentation?.value?.contents?.filter((item) => item.selected)[0]
 )
-const checkPage = computed(() => getSelected.value === 'index' || getSelected.value === 'integration')
+const checkPage = computed(
+    () => getSelected.value === 'index' || getSelected.value === 'integration'
+)
 const route = useRoute()
-
 
 const handleClick = (e) => {
     if (e.target.tagName === 'A') {
-        let {url, lastPart} = getUrlWithParams(e)
+        let { url, lastPart } = getUrlWithParams(e)
         history.pushState({}, '', url)
         e.preventDefault()
         selectMenu(lastPart)
@@ -39,7 +40,7 @@ const getUrlWithParams = (e = null) => {
     const url = e?.target?.href || window.location.href
     const parts = url.split('/')
     const lastPart = parts[parts.length - 1]
-    return {url, lastPart}
+    return { url, lastPart }
 }
 
 const selectMenu = (selected) => {
@@ -48,7 +49,7 @@ const selectMenu = (selected) => {
 </script>
 <template>
     <div class="documentation-content content">
-        <documentation-menu/>
+        <documentation-menu />
         <div class="documentation-context">
             <div class="submenu" v-if="!checkPage">{{ selected?.title }}</div>
             <h1 v-html="getDocumentation?.text?.title"></h1>

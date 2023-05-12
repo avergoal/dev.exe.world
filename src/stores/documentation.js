@@ -3,11 +3,11 @@ import { defineStore } from 'pinia'
 export const useDocumentationStore = defineStore('documentation', {
     state: () => ({
         documentation: Array,
-        selected: Array,
+        selected: Array
     }),
     getters: {
         getDocumentation: (state) => state.documentation,
-        getSelected: (state) => state.selected,
+        getSelected: (state) => state.selected
     },
     actions: {
         async setDocumentationsMenu(page_id = null) {
