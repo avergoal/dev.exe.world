@@ -50,8 +50,8 @@ const selectMenu = (selected) => {
     <div class="documentation-content content">
         <documentation-menu/>
         <div class="documentation-context">
-            <h1 v-if="checkPage">{{ selected?.title }}</h1>
-            <div class="submenu" v-else>{{ selected?.title }}</div>
+            <div class="submenu" v-if="!checkPage">{{ selected?.title }}</div>
+            <h1 v-html="getDocumentation?.text?.title"></h1>
             <span v-html="getDocumentation?.text?.text" @click.prevent="handleClick"></span>
         </div>
     </div>
