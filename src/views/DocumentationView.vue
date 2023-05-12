@@ -13,9 +13,8 @@ onMounted(() => {
         history.pushState({}, '', lastPart)
     }
     documentation.setDocumentationsMenu(lastPart)
-    window.addEventListener('popstate', handlePopstate);
+    window.addEventListener('popstate', handlePopstate)
 })
-
 
 const documentation = useDocumentationStore()
 
@@ -38,7 +37,7 @@ const handleClick = (e) => {
     }
 }
 
-const handlePopstate = () =>{
+const handlePopstate = () => {
     let lastPart = getUrlWithParams().lastPart
     documentation.setDocumentationsMenu(lastPart)
 }
