@@ -9,9 +9,25 @@
         line-height: 28px;
         font-weight: 400;
         font-family: var(--font-raleway);
-        h1 {
+        .submenu {
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: 0.0015em;
+            color: var(--grey-medium);
+            margin-bottom: 24px;
+        }
+        b {
             color: var(--black-primary);
-            margin-bottom: 40px;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 32px;
+            line-height: 40px;
+            display: block;
+            letter-spacing: 0.0025em;
         }
         ul {
             padding-left: 18px;
@@ -32,6 +48,20 @@
                     background: black;
                     border-radius: 50%;
                     left: -15px;
+                }
+                a {
+                    font-family: 'Raleway', sans-serif;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 28px;
+                    text-align: justify;
+                    letter-spacing: 0.001em;
+                    color: var(--violet-primary);
+                    margin-top: 10px;
+                    &:after {
+                        content: none;
+                    }
                 }
             }
         }

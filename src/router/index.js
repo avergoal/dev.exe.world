@@ -17,7 +17,7 @@ const router = createRouter({
             component: () => import('@/views/AuthView.vue')
         },
         {
-            path: '/documentation',
+            path: '/docs/:path(.*)?',
             name: 'Documentation',
             component: () => import('@/views/DocumentationView.vue')
             // children: [
@@ -98,6 +98,10 @@ const router = createRouter({
                     component: () => import('@/components/my-games/GameHelp.vue')
                 }
             ]
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: '/'
         }
     ]
 })

@@ -1,20 +1,42 @@
 <script setup>
 import DocumentationMenu from '@/components/documentation/menu/DocumentationMenu.vue'
 import { useDocumentationStore } from '@/stores/documentation'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
+onMounted(() => {
+    let lastPart = {}
+    if (route.path === '/docs') {
+        history.pushState({}, '', 'docs/index')
+    } else {
+        lastPart = getUrlWithParams().lastPart
+        history.pushState({}, '', lastPart)
+    }
+    documentation.setDocumentationsMenu(lastPart)
+})
 
 const documentation = useDocumentationStore()
 
 const getDocumentation = computed(() => documentation.getDocumentation)
+const selected = computed(
+    () => getDocumentation?.value?.contents?.filter((item) => item.selected)[0]
+)
+const route = useRoute()
 
 const handleClick = (e) => {
     if (e.target.tagName === 'A') {
-        const url = e.target.href
-        const parts = url.split('/')
-        const lastPart = parts[parts.length - 1]
+        let { url, lastPart } = getUrlWithParams(e)
+        history.pushState({}, '', url)
         e.preventDefault()
         selectMenu(lastPart)
     }
+}
+
+const getUrlWithParams = (e = null) => {
+    const url = e?.target?.href || window.location.href
+    const parts = url.split('/')
+    const lastPart = parts[parts.length - 1]
+    return { url, lastPart }
 }
 
 const selectMenu = (selected) => {
@@ -25,7 +47,7 @@ const selectMenu = (selected) => {
     <div class="documentation-content content">
         <documentation-menu />
         <div class="documentation-context">
-            <h1 v-html="getDocumentation?.text?.title"></h1>
+            <div class="submenu">{{ selected?.title }}</div>
             <span v-html="getDocumentation?.text?.text" @click.prevent="handleClick"></span>
         </div>
     </div>

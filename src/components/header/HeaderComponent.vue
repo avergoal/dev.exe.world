@@ -45,7 +45,10 @@ const closeMenu = (e) => {
                 </router-link>
             </div>
             <nav>
-                <router-link :to="{ name: 'Documentation' }" class="button-1"
+                <router-link
+                    :to="{ path: '/docs/index' }"
+                    class="button-1"
+                    :class="{ 'router-link-active': $route.path.startsWith('/docs') }"
                     >documentation
                 </router-link>
                 <router-link

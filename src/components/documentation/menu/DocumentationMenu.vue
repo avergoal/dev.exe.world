@@ -1,17 +1,14 @@
 <script setup>
 import { useDocumentationStore } from '@/stores/documentation'
-import { computed, onMounted } from 'vue'
-
-onMounted(() => {
-    documentation.setDocumentationsMenu()
-})
+import { computed } from 'vue'
 
 const documentation = useDocumentationStore()
 
 const getDocumentation = computed(() => documentation.getDocumentation)
 
-const selectMenu = (selected) => {
-    documentation.setDocumentationsMenu(selected)
+const selectMenu = async (selected) => {
+    await documentation.setDocumentationsMenu(selected)
+    history.replaceState({}, '', selected)
 }
 </script>
 
