@@ -60,8 +60,8 @@ const onInput = (event) => {
 watch(
     () => props.inputValue,
     (newValue) => {
-            emit('update:modelValue', newValue)
-            value.value = newValue
+        emit('update:modelValue', newValue)
+        value.value = newValue
     }
 )
 </script>

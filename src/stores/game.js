@@ -40,7 +40,7 @@ export const useGameStore = defineStore('game', {
             this.gameIcon = this.gameInfo?.files.find((file) => parseInt(file.type) === 1)?.filename
         },
         async updateGameInfo(params) {
-            const {data} = await this.$axios.post('dev.game.info.save', params)
+            const { data } = await this.$axios.post('dev.game.info.save', params)
             await this.actionGetGameInfo(params.gid)
             return data.response.result
         },

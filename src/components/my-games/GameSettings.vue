@@ -2,10 +2,10 @@
 import VInput from '@/components/ui/form-elements/VInput.vue'
 import VSelect from '@/components/ui/form-elements/VSelect.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
-import {useGameStore} from '@/stores/game'
-import {computed, onMounted, ref} from 'vue'
-import {useRoute} from 'vue-router'
-import {useModalStore} from "@/stores/modal";
+import { useGameStore } from '@/stores/game'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useModalStore } from '@/stores/modal'
 
 onMounted(() => {
     gameStore.actionGetGameSettings(gameId.value)
@@ -18,9 +18,9 @@ const main_url = ref('')
 const payment_url = ref('')
 const status = ref('')
 const data = [
-    {id: 0, status: 'Not published'},
-    {id: 1, status: 'Published'},
-    {id: 2, status: 'Technical works'}
+    { id: 0, status: 'Not published' },
+    { id: 1, status: 'Published' },
+    { id: 2, status: 'Technical works' }
 ]
 
 const gameId = computed(() => route.params.id)
@@ -35,8 +35,7 @@ const saveSettings = async () => {
     }
     const res = await gameStore.saveSettings(params)
 
-    modalStore.toggleModal({target: 'success-failed', open: true, data: res})
-
+    modalStore.toggleModal({ target: 'success-failed', open: true, data: res })
 }
 </script>
 
@@ -53,18 +52,18 @@ const saveSettings = async () => {
                 @update:modelValue="status = $event"
                 find-value="id"
                 :selected-value="parseInt(getGameSettings.status)"
-            >Status
+                >Status
             </v-select>
         </div>
         <h3>Iframe container settings</h3>
         <div class="iframe-settings">
             <v-input :input-value="getGameSettings.main_url" @update:modelValue="main_url = $event"
-            >Https address
+                >Https address
             </v-input>
             <v-input
                 :input-value="getGameSettings.payment_url"
                 @update:modelValue="payment_url = $event"
-            >Callback address
+                >Callback address
             </v-input>
         </div>
         <div class="buttons">

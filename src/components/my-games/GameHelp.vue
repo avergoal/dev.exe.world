@@ -1,11 +1,11 @@
 <script setup>
-import {computed, ref} from 'vue'
-import {useRoute} from 'vue-router'
-import {useHelpStore} from '@/stores/help'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useHelpStore } from '@/stores/help'
 import VInput from '@/components/ui/form-elements/VInput.vue'
 import VTextArea from '@/components/ui/form-elements/VTextArea.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
-import {useModalStore} from "@/stores/modal";
+import { useModalStore } from '@/stores/modal'
 
 const route = useRoute()
 const helpStore = useHelpStore()
@@ -50,20 +50,28 @@ const sendTicket = async () => {
     name.value = ''
     text.value = ''
 
-    modalStore.toggleModal({target: 'success-failed', open: true,data:res})
+    modalStore.toggleModal({ target: 'success-failed', open: true, data: res })
 }
 </script>
 <template>
     <div class="help-content">
         <h1>Help</h1>
         <div class="help">
-            <v-input limit="100" :input-value="title" @update:modelValue="title = $event" :error="error.title"
-            >Title
+            <v-input
+                limit="100"
+                :input-value="title"
+                @update:modelValue="title = $event"
+                :error="error.title"
+                >Title
             </v-input>
-            <v-input :input-value="mail" @update:modelValue="mail = $event" :error="error.mail">Email</v-input>
-            <v-input :input-value="name" @update:modelValue="name = $event" :error="error.name">Name</v-input>
+            <v-input :input-value="mail" @update:modelValue="mail = $event" :error="error.mail"
+                >Email</v-input
+            >
+            <v-input :input-value="name" @update:modelValue="name = $event" :error="error.name"
+                >Name</v-input
+            >
             <v-text-area :input-value="text" @update:modelValue="text = $event" :error="error.text"
-            >Describe the problem
+                >Describe the problem
             </v-text-area>
         </div>
         <div class="buttons">
