@@ -40,8 +40,9 @@ export const useGameStore = defineStore('game', {
             this.gameIcon = this.gameInfo?.files.find((file) => parseInt(file.type) === 1)?.filename
         },
         async updateGameInfo(params) {
-            await this.$axios.post('dev.game.info.save', params)
+            const {data} = await this.$axios.post('dev.game.info.save', params)
             await this.actionGetGameInfo(params.gid)
+            return data.response.result
         },
         async actionGetGameSettings(gid) {
             const { data } = await this.$axios.post('dev.game.settings', { gid })
@@ -49,7 +50,7 @@ export const useGameStore = defineStore('game', {
         },
         async saveSettings(params) {
             const { data } = await this.$axios.post('dev.game.settings.save', params)
-            this.gameSettings = data.response.result
+            return data.response.result
         },
         async actionGetGameStatistics(params) {
             const { data } = await this.$axios.post('dev.game.statistics', params)

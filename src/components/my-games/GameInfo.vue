@@ -1,9 +1,9 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { useGameStore } from '@/stores/game'
-import { useMediaStore } from '@/stores/media'
-import { useModalStore } from '@/stores/modal'
+import {computed, onMounted, ref, watch} from 'vue'
+import {useRoute} from 'vue-router'
+import {useGameStore} from '@/stores/game'
+import {useMediaStore} from '@/stores/media'
+import {useModalStore} from '@/stores/modal'
 import VInput from '@/components/ui/form-elements/VInput.vue'
 import VSelect from '@/components/ui/form-elements/VSelect.vue'
 import VTextArea from '@/components/ui/form-elements/VTextArea.vue'
@@ -44,8 +44,8 @@ const updateGameInfo = async () => {
         description: description.value,
         type: type.value
     }
-    await gameStore.updateGameInfo(params)
-    modalStore.toggleModal({ target: 'success', open: true })
+    const res = await gameStore.updateGameInfo(params)
+    modalStore.toggleModal({target: 'success-failed', open: true, data: res})
 }
 
 const setImages = () => {
@@ -90,12 +90,12 @@ watch(
                 id-type="cid"
                 :selected-value="parseInt(getGameInfo.type)"
                 findValue="cid"
-                >Choose genre
+            >Choose genre
             </v-select>
         </div>
         <h3>Covers</h3>
         <div class="covers">
-            <v-cover-input :type="type" :key="type" :src="files[type]" v-for="type in coverTypes" />
+            <v-cover-input :type="type" :key="type" :src="files[type]" v-for="type in coverTypes"/>
         </div>
         <div class="buttons">
             <main-button @click="updateGameInfo">save changes</main-button>

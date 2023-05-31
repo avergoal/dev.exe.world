@@ -20,6 +20,7 @@ const props = defineProps({
 
 onMounted(() => {
     if (props.inputValue) {
+        emit('update:modelValue', props.inputValue)
         value.value = props.inputValue
     }
 })
@@ -40,10 +41,8 @@ const onInput = (event) => {
 watch(
     () => props.inputValue,
     (newValue) => {
-        if (newValue) {
-            emit('update:modelValue', newValue)
-            value.value = newValue
-        }
+        emit('update:modelValue', newValue)
+        value.value = newValue
     }
 )
 </script>
