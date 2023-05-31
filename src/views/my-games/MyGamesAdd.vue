@@ -57,7 +57,9 @@ const addGame = async () => {
                     <v-checkbox @update:modelValue="agree = $event"
                         >I agree with the
                         <template #violet>
-                            <router-link to="/">Rules for posting applications </router-link>
+                            <router-link to="/docs/terms_of_placement"
+                                >Rules for posting applications
+                            </router-link>
                         </template>
                     </v-checkbox>
                 </div>

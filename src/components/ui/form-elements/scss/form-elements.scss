@@ -10,6 +10,7 @@ fieldset {
     &.error {
         border: 1px solid red;
     }
+
     .error-text {
         color: red;
     }
@@ -233,6 +234,11 @@ fieldset {
     .violet {
         color: var(--violet-primary);
         margin-left: -6px;
+
+        a {
+            height: max-content;
+            display: block;
+        }
     }
 
     input {
