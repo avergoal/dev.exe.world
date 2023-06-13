@@ -32,11 +32,11 @@ const addAdministrator = (type) => {
                     <h3>
                         Owner
                         <info-icon class="tooltip" />
-                        <span class="tooltip-text c-2-regular"
-                            >Administrators are appointed by the owner. Have all the rights to edit
-                            the application settings, except for changing the secret key, game state
-                            and application ID. Has the right to appoint testers</span
-                        >
+                        <span class="tooltip-text c-2-regular">
+                            The user who added the game to the site. Has full rights to edit
+                            application settings, up to changing the secret key. Has the right to
+                            appoint Administrators and Testers
+                        </span>
                     </h3>
                     <main-button
                         v-if="getAdministrators?.owner?.length"
