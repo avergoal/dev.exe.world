@@ -22,6 +22,10 @@ export const useMediaStore = defineStore('media', {
                     'Content-Type': 'multipart/form-data'
                 }
             })
+        },
+        async deleteMedia(params) {
+            const { data } = await this.$axios.post('dev.media.delete', params)
+            return data.response.result.success
         }
     }
 })

@@ -26,7 +26,7 @@ const modalStore = useModalStore()
 const title = ref('')
 const description = ref('')
 const type = ref('')
-const coverTypes = ['carousel', 'cover', 'icon']
+const coverTypes = ['carousel', 'cover', 'icon', 'screenshot']
 const files = ref({})
 
 const gameId = computed(() => route.params.id)
@@ -51,10 +51,20 @@ const updateGameInfo = async () => {
 const setImages = () => {
     coverTypes.forEach((type) => {
         let id = Object.values(getMediaTypes.value).find((item) => item.code === type)?.id
-        files.value[type] = getGameInfo.value.files?.find(
-            (item) => parseInt(item.type) === id
-        )?.filename
+        if (type === 'screenshot') {
+            files.value[type] = getGameInfo.value.files?.filter(
+                (item) => parseInt(item.type) === id
+            )
+        } else {
+            files.value[type] = getGameInfo.value.files?.filter(
+                (item) => parseInt(item.type) === id
+            )
+        }
     })
+}
+
+const onDeleteSuccess = () => {
+    gameStore.actionGetGameInfo(gameId.value)
 }
 
 watch(
@@ -95,7 +105,14 @@ watch(
         </div>
         <h3>Covers</h3>
         <div class="covers">
-            <v-cover-input :type="type" :key="type" :src="files[type]" v-for="type in coverTypes" />
+            <v-cover-input
+                @onDeleteSuccess="onDeleteSuccess"
+                :type="type"
+                :key="type"
+                :multiple="type === 'screenshot'"
+                :src="files[type]"
+                v-for="type in coverTypes"
+            />
         </div>
         <div class="buttons">
             <main-button @click="updateGameInfo">save changes</main-button>
