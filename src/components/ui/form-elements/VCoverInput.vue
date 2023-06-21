@@ -1,7 +1,7 @@
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
-import { useMediaStore } from '@/stores/media'
+import {computed, ref, watchEffect} from 'vue'
+import {useRoute} from 'vue-router'
+import {useMediaStore} from '@/stores/media'
 import PlusIcon from '@/components/icons/PlusIcon.vue'
 import MainButton from '@/components/ui/buttons/MainButton.vue'
 import CoverLoadingIcon from '@/components/icons/CoverLoadingIcon.vue'
@@ -36,47 +36,85 @@ const inputClick = () => {
 }
 
 const uploadImage = (e) => {
-    const images = e.target.files
+    const images = e.target.files;
     let params = {
         gid: gameId.value,
         type: props.type
-    }
-
-    let tmpSrc = preloadSrc.value
-
-    const uploadPromises = []
+    };
+    if (!props.multiple)
+        loading.value = true;
+    let tmpSrc = JSON.parse(JSON.stringify(preloadSrc.value));
+    const uploadPromises = [];
 
     for (let i = 0; i < images.length; i++) {
-        const image = images[i]
-        const reader = new FileReader()
+        const image = images[i];
+        const formImage = images[i];
+        let uploadPromise;
+        const reader = new FileReader();
+
         reader.onload = () => {
-            preloadSrc.value.push({ filename: reader.result })
-            loading.value = true
-            const uploadPromise = mediaStore
-                .uploadMedia(image, params)
+            if (props.multiple) {
+                preloadSrc.value.push({filename: reader.result, loading: true});
+            } else {
+                preloadSrc.value = [{filename: reader.result}]
+            }
+        };
+        const formData = new FormData();
+        formData.append('file', formImage);
+        Object.keys(params).forEach((key) => {
+            formData.append(key, params[key]);
+        });
+        uploadPromise = new Promise((resolve, reject) => {
+            mediaStore
+                .uploadMedia(formData)
                 .then((response) => {
-                    console.log('Upload successful:', response.data)
+                    resolve(response);
                 })
                 .catch((error) => {
-                    console.error('Upload error:', error)
+                    reject(error);
                 })
-                .finally(() => {
-                    loading.value = false
-                })
-            uploadPromises.push(uploadPromise)
-        }
-        reader.readAsDataURL(image)
-    }
+        });
 
-    Promise.all(uploadPromises)
-        .then((r) => {
-            console.log(r, 'All uploads completed.')
+        uploadPromises.push(uploadPromise);
+
+        reader.readAsDataURL(image);
+    }
+    const successfulResponses = [];
+    const errorResponses = [];
+
+    Promise.all(uploadPromises.map(promise =>
+        promise
+            .then(response => successfulResponses.push(response))
+            .catch(error => errorResponses.push(error))
+    ))
+        .then(() => {
+            if (props.multiple && successfulResponses.length) {
+                preloadSrc.value = tmpSrc;
+                successfulResponses.forEach(r => {
+                    preloadSrc.value.push({
+                        fid: r.data.response.result.fid,
+                        filename: r.data.response.result.url,
+                        delete_code: r.data.response.result.delete_code,
+                    })
+                })
+                tmpSrc = JSON.parse(JSON.stringify(preloadSrc.value));
+            } else if (successfulResponses.length) {
+                preloadSrc.value = [{
+                    fid: successfulResponses[0].data.response.result.fid,
+                    filename: successfulResponses[0].data.response.result.url,
+                    delete_code: successfulResponses[0].data.response.result.delete_code,
+                }];
+            }
+
+            errorResponses.forEach((error) => {
+                console.error('Upload error:', error);
+                preloadSrc.value = tmpSrc;
+            });
         })
-        .catch((error) => {
-            console.error('Error during multiple uploads:', error)
-            preloadSrc.value = tmpSrc
-        })
-}
+        .finally(() => {
+            loading.value = false;
+        });
+};
 
 const deleteMedia = async (fid, delete_code) => {
     let params = {
@@ -97,22 +135,22 @@ watchEffect(() => {
 <template>
     <div class="cover">
         <label
-            :key="src.fid"
+            :key="src?.fid"
             v-for="src in preloadSrc"
             :for="'cover_upload' + props.type"
             class="cover-label"
             :class="{ mid: props.type === 'cover', small: props.type === 'icon' }"
         >
-            <cover-loading-icon class="loading" v-if="loading" />
+            <cover-loading-icon class="loading" v-if="loading || src?.loading"/>
             <img
                 :src="src.filename"
-                :class="{ blur: loading }"
+                :class="{ blur: loading || src?.loading}"
                 :alt="src.filename"
                 v-if="src"
                 class="preload-image"
             />
             <span class="delete" @click.prevent="deleteMedia(src.fid, src.delete_code)">
-                <delete-icon />
+                <delete-icon/>
             </span>
         </label>
         <label
@@ -121,9 +159,7 @@ watchEffect(() => {
             class="cover-label"
             :class="{ mid: props.type === 'cover', small: props.type === 'icon' }"
         >
-            <plus-icon />
-
-            <cover-loading-icon class="loading" v-if="loading" />
+            <plus-icon/>
         </label>
         <input
             accept="image/*"
@@ -157,7 +193,7 @@ watchEffect(() => {
             </div>
             <div class="button">
                 <main-button :secondary="true" :small="true" @click="inputClick"
-                    >upload
+                >upload
                 </main-button>
             </div>
         </div>
