@@ -15,10 +15,7 @@ const toRoute = (name) => {
         <div class="context">
             <h1>Hosting browser games</h1>
             <p class="b-1-regular">
-                EXE.WORLD is a modern gaming portal with a constantly growing audience. We provide
-                developers with the most favorable conditions for hosting applications. Clear and
-                simple tools will allow you to quickly and easily place your application in our
-                catalog, attract an audience and become a successful developer! Get started now!
+                Exe.world is a modern gaming portal with a constantly growing audience. We provide developers with the most favourable conditions for hosting applications. Clear and simple tools will allow you to quickly and easily place your application in our catalogue, attract an audience and become a successful developer! Get started now!
             </p>
             <div class="block">
                 <div class="block-item">
@@ -26,18 +23,17 @@ const toRoute = (name) => {
                         >Documentation
                     </router-link>
                     <p class="b-2-regular">
-                        A detailed description of the process and conditions for placing games on
-                        the EXE.ru platform.
+                        A detailed description of the process and conditions for placing games on the Exe.world platform.
                     </p>
                 </div>
                 <div class="block-item">
-                    <h5 class="sub-1">Accommodation conditions</h5>
+                    <router-link :to="{ path: 'docs/terms_of_placement' }" class="sub-1">Terms of Placement</router-link>
                     <p class="b-2-regular">
                         Requirements for games and developers by the site administration.
                     </p>
                 </div>
                 <div class="block-item">
-                    <h5 class="sub-1">Game API Method List</h5>
+                    <router-link :to="{ path: 'docs/app_methods' }" class="sub-1">Game API Method List</router-link>
                     <p class="b-2-regular">
                         All methods for working with the data of the EXE.ru platform: server,
                         client, payment.
