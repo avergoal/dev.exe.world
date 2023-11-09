@@ -35,8 +35,7 @@ const toRoute = (name) => {
                 <div class="block-item">
                     <router-link :to="{ path: 'docs/app_methods' }" class="sub-1">Game API Method List</router-link>
                     <p class="b-2-regular">
-                        All methods for working with the data of the EXE.ru platform: server,
-                        client, payment.
+                        All methods for working with the data of the Exe.world platform: server, client, payment.
                     </p>
                 </div>
                 <div class="block-item">
