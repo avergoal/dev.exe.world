@@ -26,6 +26,7 @@ const modalStore = useModalStore()
 const title = ref('')
 const description = ref('')
 const type = ref('')
+const developer = ref('')
 const coverTypes = ['carousel', 'cover', 'icon', 'screenshot']
 const files = ref({})
 
@@ -42,7 +43,8 @@ const updateGameInfo = async () => {
         gid: gameId.value,
         title: title.value,
         description: description.value,
-        type: type.value
+        type: type.value,
+        developer: developer.value,
     }
     const res = await gameStore.updateGameInfo(params)
     modalStore.toggleModal({ target: 'success-failed', open: true, data: res })
@@ -92,6 +94,12 @@ watch(
                 @update:modelValue="description = $event"
             >
                 Description
+            </v-text-area>
+            <v-text-area
+                :input-value="getGameInfo.developer"
+                @update:modelValue="developer = $event"
+            >
+                About developer
             </v-text-area>
             <v-select
                 @update:modelValue="type = $event"

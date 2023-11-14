@@ -17,6 +17,7 @@ const route = useRoute()
 const main_url = ref('')
 const payment_url = ref('')
 const status = ref('')
+const tos_url = ref('')
 const data = [
     { id: 0, status: 'Not published' },
     { id: 1, status: 'Published' },
@@ -31,7 +32,8 @@ const saveSettings = async () => {
         gid: gameId.value,
         main_url: main_url.value,
         payment_url: payment_url.value,
-        status: status.value
+        status: status.value,
+        tos_url: tos_url.value
     }
     const res = await gameStore.saveSettings(params)
 
@@ -64,6 +66,11 @@ const saveSettings = async () => {
                 :input-value="getGameSettings.payment_url"
                 @update:modelValue="payment_url = $event"
                 >Callback address
+            </v-input>
+            <v-input
+                :input-value="getGameSettings.tos_url"
+                @update:modelValue="tos_url = $event"
+            >Terms of use
             </v-input>
         </div>
         <div class="buttons">
