@@ -17,11 +17,17 @@ const route = useRoute()
 const main_url = ref('')
 const payment_url = ref('')
 const status = ref('')
+const position = ref('')
 const tos_url = ref('')
 const data = [
     { id: 0, status: 'Not published' },
     { id: 1, status: 'Published' },
     { id: 2, status: 'Technical works' }
+]
+const positionData = [
+    { id: 'left', position: 'left' },
+    { id: 'right', position: 'right' },
+    { id: 'center', position: 'center' }
 ]
 
 const gameId = computed(() => route.params.id)
@@ -33,6 +39,7 @@ const saveSettings = async () => {
         main_url: main_url.value,
         payment_url: payment_url.value,
         status: status.value,
+        position: position.value,
         tos_url: tos_url.value
     }
     const res = await gameStore.saveSettings(params)
@@ -59,6 +66,15 @@ const saveSettings = async () => {
         </div>
         <h3>Iframe container settings</h3>
         <div class="iframe-settings">
+            <v-select
+                :data="positionData"
+                id-type="id"
+                show-select="position"
+                @update:modelValue="position = $event"
+                find-value="id"
+                :selected-value="getGameSettings.position"
+            >Position
+            </v-select>
             <v-input :input-value="getGameSettings.main_url" @update:modelValue="main_url = $event"
                 >Https address
             </v-input>
