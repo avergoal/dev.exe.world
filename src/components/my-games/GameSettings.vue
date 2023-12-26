@@ -73,7 +73,7 @@ const saveSettings = async () => {
                 @update:modelValue="position = $event"
                 find-value="id"
                 :selected-value="getGameSettings.position"
-            >Position
+            >Menu button position
             </v-select>
             <v-input :input-value="getGameSettings.main_url" @update:modelValue="main_url = $event"
                 >Https address
