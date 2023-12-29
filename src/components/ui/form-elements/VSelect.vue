@@ -7,8 +7,8 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
     data: null,
     showSelect: String,
-    idType: String,
-    selectedValue: Number,
+    idType: [String,Number],
+    selectedValue: [String,Number,Boolean],
     findValue: String
 })
 
@@ -50,7 +50,7 @@ watch(
     () => props.selectedValue,
     (newValue) => {
         if (newValue || newValue === 0) {
-            selected.value = props.data.find((item) => item[props.findValue] === newValue)[
+            selected.value = props.data.find((item) => item[props.findValue] === newValue)?.[
                 props.showSelect
             ]
             emit('update:modelValue', newValue)

@@ -25,9 +25,14 @@ const data = [
     { id: 2, status: 'Technical works' }
 ]
 const positionData = [
-    { id: 'left', position: 'left' },
-    { id: 'right', position: 'right' },
-    { id: 'center', position: 'center' }
+    { id: 'top-left', position: 'top-left' },
+    { id: 'top-right', position: 'top-right' },
+    { id: 'top-center', position: 'top-center' },
+    { id: 'bottom-left', position: 'bottom-left' },
+    { id: 'bottom-right', position: 'bottom-right' },
+    { id: 'bottom-center', position: 'bottom-center' },
+    { id: 'left-center', position: 'left-center' },
+    { id: 'right-center', position: 'right-center' },
 ]
 
 const gameId = computed(() => route.params.id)

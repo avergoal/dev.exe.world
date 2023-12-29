@@ -28,7 +28,7 @@ onMounted(() => {
 const vTextArea = ref(null)
 const value = ref('')
 
-const count = computed(() => value.value.length)
+const count = computed(() => value.value?.length)
 
 const focus = () => {
     vTextArea.value.focus()
