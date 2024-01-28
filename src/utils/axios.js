@@ -34,7 +34,8 @@ instance.interceptors.response.use(
     (error) => {
         if (
             error.response.data.error === 'user_not_logged_in' ||
-            error.response.data.error === 'token_expired'
+            error.response.data.error === 'token_expired' ||
+            error.response.data.error === 'token_error'
         ) {
             localStorage.removeItem('token')
             window.location.reload()

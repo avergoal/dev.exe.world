@@ -11,10 +11,12 @@ const getGameInfo = computed(() => gameStore.getGameInfo)
 <template>
     <aside>
         <div class="game-header">
+            <a :href="`https://exe.world/game/${getGameInfo?.gid}`" target="_blank">
             <div class="game-image" :class="{ background: !getGameIcon }">
                 <games-icon v-if="!getGameIcon" />
                 <img v-else :src="getGameIcon" alt="" />
             </div>
+            </a>
             <div class="game-name sub-1">{{ getGameInfo.title }}</div>
         </div>
         <div class="menu-list">
