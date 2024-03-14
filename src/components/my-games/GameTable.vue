@@ -31,6 +31,7 @@ const loadMore = () => {
         </div>
         <div class="table-row" :key="item" v-for="item in props.data.data">
             <p class="b-1-medium item">{{ item[keys[0]] }}</p>
+            <a :href="`https://exe.world/user/${item?.uid}`" target="_blank" class="b-1-medium item">{{ item?.user?.user_name }}</a>
             <p class="b-1-regular item">{{ item[keys[2]] }}</p>
             <p class="b-1-regular item">{{ timestampToDate(item[keys[1]]) }}</p>
         </div>

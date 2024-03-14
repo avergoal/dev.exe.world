@@ -5,7 +5,7 @@
     .header,
     .table-row {
         display: grid;
-        grid-template-columns: 167px 167px 167px;
+        grid-template-columns: 167px auto 167px 167px;
         justify-content: space-between;
         justify-items: end;
         padding: 0 12px;

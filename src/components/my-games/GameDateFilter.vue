@@ -3,7 +3,7 @@ import { defineEmits, ref } from 'vue'
 
 const emit = defineEmits(['update:periodValue'])
 
-const periods = ['day', 'week', 'month', 'year']
+const periods = [ 'week', 'month', 'year']
 const activePeriod = ref(0)
 
 const selectPeriod = (period, key) => {

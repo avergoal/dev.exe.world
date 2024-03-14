@@ -68,7 +68,7 @@ const openLog = (type) => {
         <div class="charts">
             <div class="item">
                 <div class="header">
-                    <h4>Install history</h4>
+                    <h4>Payment statistics</h4>
                 </div>
                 <game-date-filter @update:periodValue="updateChart($event)" />
                 <game-chart :charts="getPaymentsStats" />
@@ -80,7 +80,7 @@ const openLog = (type) => {
                 <v-search-input @update:modelValue="updateSearchValue" placeholder="ID" />
                 <game-table
                     :data="getPaymentsHistory"
-                    :titles="['User', 'Amount of payments', 'Date & time']"
+                    :titles="['User', 'Username' , 'Amount of payments', 'Date & time']"
                     @update:data="loadMore"
                 />
             </div>

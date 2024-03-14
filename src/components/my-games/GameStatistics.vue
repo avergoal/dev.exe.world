@@ -15,7 +15,7 @@ onMounted(() => {
 
 const route = useRoute()
 const gameStore = useGameStore()
-const period = ref('day')
+const period = ref('week')
 
 const gameId = computed(() => route.params.id)
 const statistics = computed(() => gameStore.getGameStatistics)
